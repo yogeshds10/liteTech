@@ -1,0 +1,204 @@
+/*Home Screen*/
+.select-list{
+	position: relative;
+}
+.select-list::before{
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 20%;
+	height: 100%;
+	width: 1px;
+	background: #01B600;
+}
+.select-list a.item{
+	border: none;
+	padding: 7% 16px;
+	background: transparent;
+	/*display: table;*/
+}
+.select-list img{
+	max-width: 20%;
+	height: auto;
+	min-width: 110px;
+	min-height: 100px;
+	border-radius: 20%;
+	float: left;
+	/*display: table-cell;*/
+}
+.select-list .text-wrap{
+	display: table;
+	/*width: 55%;*/
+	padding: 20px 0 0 20px;
+	vertical-align: middle;
+}
+.select-list .text-wrap small{
+	display: block;
+	color: #999999;
+}
+
+/*Residence Screen*/
+.residence-wrap{
+	overflow: scroll;
+}
+.res-header{
+	background: #58ed50;
+	position: relative;
+	-webkit-box-shadow: 0px 3px 5px 0px rgba(133,128,133,0.7);
+	-moz-box-shadow: 0px 3px 5px 0px rgba(133,128,133,0.7);
+	box-shadow: 0px 3px 5px 0px rgba(133,128,133,0.7);
+}
+.res-header a{
+	position: absolute;
+	left: 20px;
+	top: 9px;
+	font-size: 2em;
+	color: #fff;
+}
+.res-header p{
+	text-align: center;
+	color: #fff;
+	font-size: 1.5em;
+	padding: 12px 0;
+	margin: 0;
+}
+.optimum-info{
+	background: #eee;
+	padding: 10px 0;
+	text-align: center;
+}
+.optimum-info span{
+	font-weight: 700;
+}
+.dimension-wrap, .light-type-wrap{
+	padding: 20px 0 0 5%;
+	color: #999999;
+}
+.dimension-wrap p, .light-type-wrap p{
+	font-size: 1.2em;	
+	color: #666666;
+}
+.light-type-wrap::after{
+	content: "";
+	display: block;
+	clear: both;
+}
+.input-wrap{
+	clear: both;
+	padding: 5px 0;
+}
+.input-wrap label{
+	float: left;
+	padding: 8px;
+	width: 70px;
+}
+.input-wrap input{
+	width: 200px;
+	border: 1px solid #58ed50;
+	border-radius: 5px;
+	padding: 0 10px;
+}
+.thumb-img-wrap ul li{
+	display: inline;
+	float: left;
+	width: 23.6%;
+	padding: 2px;	
+}
+.thumb-img-wrap img{
+	width: 100%;
+	height: auto;
+	border: 1px solid #999;
+	padding: 1px;
+}
+.thumb-img-wrap span{
+	display: block;
+	text-align: center;
+	line-height: 1;
+	padding: 0 0 15px 0;
+	font-size: 0.8em;
+}
+
+.residence-wrap button{
+	width: 120px;
+	margin: 20px auto;
+	display: block;
+	min-height: 30px;
+	padding: 0;
+	line-height: 1;
+}
+
+.popup-container .popup{
+	width: 90%;
+}
+
+.popup-wrapper img{
+	width: 100%;
+}
+.popup-container .popup-buttons{
+	min-height: 0;
+	padding: 0 0 10px 0;
+}
+.popup-container .popup-buttons button{
+	line-height: 1;
+	max-width: 100px;
+	display: block;
+	margin: 0 auto;
+	min-height: 30px;
+}
+.popup-buttons .button:last-child{
+	margin: 0 auto;
+}
+.popup-head{
+	display: none;
+}
+
+.close-popup{
+	text-align: right;
+	display: block;
+	margin: -10px -5px 0 0px;
+	color: #999;
+	cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

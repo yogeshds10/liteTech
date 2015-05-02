@@ -1,2 +1,1 @@
-# liteTech
-Hybrid app for liteTech
+LiteTech App
