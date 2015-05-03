@@ -12,7 +12,7 @@ angular.module('liteTech.controller', ['liteTech.service'])
 
 	$scope.showPopup = function(rd){
 	  myPopup = $ionicPopup.show({
-	    template: '<div class="popup-wrapper"><a class="close-popup" ng-click="popupClose()">X</a><img src="'+rd.img_url+'" alt="'+rd.model_no+'"></div>',
+	    template: '<div class="popup-wrapper"><a class="close-popup" ng-click="popupClose()">X</a><p class="popup-title">'+rd.model_no+'<span>('+rd.category+')</span></p><img src="'+rd.img_url+'" alt="'+rd.model_no+'"><div class="row"><div class="col-title">Input Power</div><div class="col-data">'+rd.input_power+' W</div></div><div class="row"><div class="col-title">Input Voltage</div><div class="col-data">'+rd.input_voltage+' V</div></div><div class="row"><div class="col-title">Driver Efficiency</div><div class="col-data">>'+rd.driver_efficiency+'%</div></div><div class="row"><div class="col-title">Color</div><div class="col-data">'+rd.color+'</div></div><div class="row"><div class="col-title">CRI</div><div class="col-data">'+rd.cri+'</div></div><div class="row"><div class="col-title">Light Output</div><div class="col-data">'+rd.light_output+'</div></div></div>',
 	    scope: $scope,
 	    buttons: [
 	      {
