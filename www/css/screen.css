@@ -5,6 +5,7 @@ body{
 .select-list{
 	position: relative;
 	font-family: "Roboto Light";
+	overflow: scroll;
 }
 /*.select-list::before{
 	content: "";
@@ -194,9 +195,110 @@ body{
 .col-data{
 
 }
+.error-msg{
+	padding: 0 0 0 20px;
+	color: #e34a33;
+	font-family: "Roboto Light";
+}
 
 
 
+.result-wrap{
+	overflow: scroll;
+}
+.result-header{
+	background: #7ed346;
+	position: relative;
+	-webkit-box-shadow: 0px 3px 5px 0px rgba(133,128,133,0.7);
+	-moz-box-shadow: 0px 3px 5px 0px rgba(133,128,133,0.7);
+	box-shadow: 0px 3px 5px 0px rgba(133,128,133,0.7);
+}
+.result-header a{
+	position: absolute;
+	left: 20px;
+	top: 9px;
+	font-size: 2em;
+	color: #fff;
+}
+.result-header p{
+	text-align: center;
+	color: #fff;
+	font-size: 1.5em;
+	padding: 12px 0;
+	margin: 0;
+}
+
+.color-selection label.button{
+	padding: 0;
+	background: #7ed346;
+	min-height: 30px;
+	line-height: 2;
+}
+.color-selection .item-content{
+	padding: 0;
+	background: #7ed346;
+	height: 30px;
+}
+.color-selection .item-radio .radio-icon{
+	padding: 0 5px;
+	top: -7px;
+}
+
+.color-selection .button-bar > .button:first-child{
+	border-radius: 10px 0 0 10px;
+}
+.color-selection .button-bar > .button:last-child{
+	border-radius: 0 10px 10px 0;
+}
+.color-selection .item-radio input:checked ~ .item-content{
+	background: #7ed346;
+}
+.fixture-count .button-bar a.button{
+	background: #7ed346;
+	min-height: 30px;
+	line-height: 2;
+	padding: 0;
+}
+.fixture-count .button-bar a.button::before{
+	line-height: 0;
+}
+.fixture-count .button-bar a.button::after{
+	position: none;
+}
+.fixture-count .button-bar > .button:last-child{
+	border-radius: 0 10px 10px 0;
+}
+.fixture-count .button-bar > .button:first-child{
+	border-radius: 10px 0 0 10px;
+}
+.fixture-wrap{
+	background: #fff;
+	padding: 20px 10px 10px;
+}
+.fixture-inner-wrap{
+	background: url('../img/light_bulb.png') no-repeat center center #ccc;
+	padding: 10px;
+	text-align: center;
+	min-height: 60vh;
+	position: relative;
+	-webkit-box-shadow: inset 0px 0px 200px 2px rgba(0,0,0,0.57);
+	-moz-box-shadow: inset 0px 0px 200px 2px rgba(0,0,0,0.57);
+	box-shadow: inset 0px 0px 200px 2px rgba(0,0,0,0.57);
+}
+.fixture-inner-wrap p span{
+	font-weight: 700;
+}
+.optimum-flux{
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+}
+.fixtures{
+	position: absolute;
+	width: 100%;
+	top: 45%;
+	font-size: 3em;
+}
 @media (max-width: 600px) {
 	.select-list a.item{
 		padding: 7% 16px;

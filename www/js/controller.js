@@ -1,13 +1,19 @@
 angular.module('liteTech.controller', ['liteTech.service'])
-.controller("appController", ['$scope','$http','liteTechService','$ionicPopup','$timeout', function($scope,$http,liteTechService,$ionicPopup,$timeout){
+.controller("appController", ['$scope','$http','liteTechService','$ionicPopup','$timeout','$state', function($scope,$http,liteTechService,$ionicPopup,$timeout,$state){
 
 	$scope.residence = {};
 	$scope.selections = {};
+	$scope.validateMsg = '';
+	$scope.fixtures = 0;
+	$scope.currentAvgFlux = 0;
+	$scope.optimumFlux = 250;
+	$scope.fixtureFlux = 0;
+	$scope.luminenSet = [];
 	 
 	liteTechService.getResidence().then(function(response){
 		$scope.residence.data = response.data;
 	}, function(response){
-		console.error("Failed to fetch residence data");
+		$scope.validateMsg = 'Failed to fetch residence data !!!';
 	});
 
 	$scope.showPopup = function(rd){
@@ -24,15 +30,50 @@ angular.module('liteTech.controller', ['liteTech.service'])
 	      }
 	    ]
 	  });
-
 	};
 
 	$scope.popupClose = function (){
 		myPopup.close();
 	};
 
-	$scope.selections.calculate = function (){
-		
+	$scope.getLuminen = function(){
+		var lightOutput = '';
+		for(data in $scope.residence.data){
+			if($scope.residence.data[data].model_no === $scope.selections.model){
+				lightOutput = $scope.residence.data[data].light_output;
+			}
+		}
+		$scope.luminenSet = lightOutput.split('/');
 	}
+
+	$scope.calculateFlux = function(color){
+		var flength = ($scope.selections.length/3.28) * 0.75;
+		var fwidth = ($scope.selections.width/3.28) * 0.75;
+		var luminen = parseInt($scope.luminenSet[color]);
+		var fixture = ($scope.optimumFlux * flength * fwidth) / (0.63 * 0.69 * luminen);
+		$scope.fixtures = Math.round(fixture);
+		$scope.fixtureFlux = $scope.optimumFlux/$scope.fixtures;
+		$scope.currentAvgFlux = $scope.optimumFlux;
+	};
+
+	$scope.validate = function (){
+		if($scope.selections.length === '' || $scope.selections.length === undefined || $scope.selections.width === '' || $scope.selections.width === undefined || $scope.selections.height === '' || $scope.selections.height === undefined || $scope.selections.model === '' || $scope.selections.model === undefined){
+			$scope.validateMsg = 'Please provide the area of room and also select any one light !!!';
+		}else{
+			$scope.getLuminen();
+			$scope.calculateFlux(0);
+			$state.go('result');
+		}
+	};
+
+	$scope.increaseFixture = function(){
+		$scope.fixtures = $scope.fixtures + 1;
+		$scope.currentAvgFlux = Math.round($scope.fixtureFlux*$scope.fixtures);
+	};
+
+	$scope.decreaseFixture = function(){
+		$scope.fixtures = $scope.fixtures - 1;
+		$scope.currentAvgFlux = Math.round($scope.fixtureFlux*$scope.fixtures);
+	};
 
 }]);

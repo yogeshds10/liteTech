@@ -1,4 +1,53 @@
 <div class="result-wrap">
-	<p ng-repeat="(i,x) in selections">{{i}}:{{x}}</p>
-	<button ui-sref="home">Home</button>
+	<div class="result-header">
+		<a ui-sref="residence" class="ion-arrow-left-c"></a>
+		<p>calculate</p>
+	</div>
+	<div class="fixture-wrap">
+		<div class="fixture-inner-wrap">
+			<p class="current-avg-flux">Current Average Flux : <span>{{currentAvgFlux}}</span></p>
+			<div class="draw-area">
+				<p class="fixtures">Fixtures : {{fixtures}}</p>
+			</div>
+			<p class="optimum-flux">Optimum Flux : <span>{{optimumFlux}}</span></p>
+		</div>
+	</div>
+	<div class="row fixture-count">
+		<div class="col col-33">
+			<p>Fixtures</p>
+			<div class="button-bar">
+			  <a class="button ion-plus-round" ng-click="increaseFixture()"></a>
+			  <a class="button">{{fixtures}}</a>
+			  <a class="button ion-minus-round" ng-click="decreaseFixture()"></a>
+			</div>	
+		</div>
+	</div>
+	<div class="row color-selection">
+		<div class="col">
+			<p>Select Colors</p>
+			<div class="button-bar">
+				<label class="button item-radio">
+				    <input type="radio" name="group" ng-click="calculateFlux(0)">
+				    <div class="item-content">
+				      6000K
+				    </div>
+				    <i class="radio-icon ion-checkmark"></i>
+			  	</label>
+			  	<label class="button item-radio">
+				    <input type="radio" name="group" ng-click="calculateFlux(1)">
+				    <div class="item-content">
+				      4000k
+				    </div>
+				    <i class="radio-icon ion-checkmark"></i>
+			  	</label>
+			  	<label class="button item-radio">
+				    <input type="radio" name="group" ng-click="calculateFlux(2)">
+				    <div class="item-content">
+				      3000k
+				    </div>
+				    <i class="radio-icon ion-checkmark"></i>
+			  	</label>
+			</div>	
+		</div>
+	</div>
 </div>

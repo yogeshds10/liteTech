@@ -4,7 +4,7 @@
 		<p>Residential</p>
 	</div>
 	<div class="optimum-info">
-		The optimum flux for a residence is <span>150</span>
+		The optimum flux for a residence is <span>{{optimumFlux}}</span>
 	</div>
 	<div class="dimension-wrap">
 		<p>Enter space dimensions :</p>
@@ -32,5 +32,6 @@
       </ul>
     </div>
   </div>
-  <button class="button button-balanced button-next" ng-click="selections.calculate()" ui-sref="result">Next</button>
+  <p class="error-msg">{{validateMsg}}</p>
+  <button class="button button-balanced button-next" ng-click="validate()">Next</button>
 </div>
