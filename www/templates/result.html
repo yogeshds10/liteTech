@@ -3,23 +3,31 @@
 		<a ui-sref="residence" class="ion-arrow-left-c"></a>
 		<p>calculate</p>
 	</div>
-	<div class="fixture-wrap">
+	<!-- <div class="fixture-wrap">
 		<div class="fixture-inner-wrap">
 			<p class="current-avg-flux">Current Average Flux : <span>{{currentAvgFlux}}</span></p>
 			<div class="draw-area">
-				<p class="fixtures">Fixtures : {{fixtures}}</p>
+				<p class="fixtures">Fixtures : {{graphData.fixtures}}</p>
 			</div>
 			<p class="optimum-flux">Optimum Flux : <span>{{optimumFlux}}</span></p>
 		</div>
-	</div>
+	</div> -->
+	<div id="container"></div>
 	<div class="row fixture-count">
 		<div class="col col-33">
 			<p>Fixtures</p>
 			<div class="button-bar">
 			  <a class="button ion-plus-round" ng-click="increaseFixture()"></a>
-			  <a class="button">{{fixtures}}</a>
+			  <a class="button">{{graphData.fixtures}}</a>
 			  <a class="button ion-minus-round" ng-click="decreaseFixture()"></a>
 			</div>	
+		</div>
+		<div class="col col-77">
+			<p>Flux Value</p>
+			<div class="button-bar">
+				<a class="button">Crnt Avg Flux : {{currentAvgFlux}}</a>
+				<a class="button">Optimum Flux : {{optimumFlux}}</a>				
+			</div>
 		</div>
 	</div>
 	<div class="row color-selection">

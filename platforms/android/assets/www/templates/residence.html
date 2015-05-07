@@ -25,7 +25,7 @@
     <p>Choose light type</p>
     <div class="thumb-img-wrap">
       <ul>
-        <li ng-repeat="rd in residence.data" ng-click="showPopup(rd)">
+        <li ng-repeat="rd in residence.data" ng-click="showPopup(rd)" ng-class="{selectedImg : rd.selected}">
           <img src="{{rd.img_url}}" alt=""/>
           <span>{{rd.model_no}}</span>
         </li>

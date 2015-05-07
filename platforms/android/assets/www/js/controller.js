@@ -12,6 +12,10 @@ angular.module('liteTech.controller', ['liteTech.service'])
 	 
 	liteTechService.getResidence().then(function(response){
 		$scope.residence.data = response.data;
+		for(x in $scope.residence.data){
+			$scope.residence.data[x].selected = false;
+		}
+		console.log($scope.residence.data[0]);
 	}, function(response){
 		$scope.validateMsg = 'Failed to fetch residence data !!!';
 	});
@@ -26,6 +30,13 @@ angular.module('liteTech.controller', ['liteTech.service'])
 	        type: 'button-balanced',
 	        onTap: function(e) {
 	          $scope.selections.model = rd.model_no;
+	        	for(x in $scope.residence.data){
+					if($scope.residence.data[x].model_no === rd.model_no){
+						$scope.residence.data[x].selected = true;
+					}else{
+						$scope.residence.data[x].selected = false;
+					}
+				}
 	        }
 	      }
 	    ]

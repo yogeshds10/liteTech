@@ -101,7 +101,7 @@ body{
 }
 .input-wrap input{
 	width: 200px;
-	border: 1px solid #58ed50;
+	border: 1px solid #7ed346;
 	border-radius: 5px;
 	padding: 0 10px;
 	font-family: "Roboto Light";
@@ -117,6 +117,9 @@ body{
 	height: auto;
 	border: 1px solid #999;
 	padding: 1px;
+}
+.thumb-img-wrap .selectedImg img{
+	border: 1px solid #7ed346;
 }
 .thumb-img-wrap span{
 	display: block;
