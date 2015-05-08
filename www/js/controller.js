@@ -91,7 +91,6 @@ angular.module('liteTech.controller', ['liteTech.service'])
 	};
 
   $scope.plotGraph = function () {  	
-
 	$scope.graphData.maxSpace = 1.25;
 	$scope.graphData.noOfRows = Math.round($scope.graphData.roomWidth/$scope.graphData.maxSpace);
 	$scope.graphData.fixturesInRow = Math.round($scope.graphData.fixtures/$scope.graphData.noOfRows);
@@ -113,14 +112,21 @@ angular.module('liteTech.controller', ['liteTech.service'])
 		_rowPosition = _rowPosition+ $scope.graphData.traverseSpace;
 	}
 
+	setTimeout(
+		function(){
     $('#container').highcharts({
-
         chart: {
             type: 'scatter',
             plotBorderWidth: 1,
             zoomType: 'xy',
+         //    spacingBottom: 10,
+	        // spacingTop: 10,
+	        // spacingLeft: 10,
+	        // spacingRight: 10,
+	        marginLeft: 8,
+	        marginTop:17,
             backgroundColor: {
-		         	linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+		       	linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
 		          stops: [
 		            [0, '#2a2a2b'],
 		            [1, '#3e3e40']
@@ -128,7 +134,10 @@ angular.module('liteTech.controller', ['liteTech.service'])
 		      	},
 				    style: {
 				      fontFamily: "Roboto Regular"
-				    },
+				    }
+        },
+        credits: {
+            enabled: false
         },
         subtitle: {
 		      style: {
@@ -138,17 +147,9 @@ angular.module('liteTech.controller', ['liteTech.service'])
         xAxis: {
         		gridLineColor: '#707073',
         		gridLineWidth: 1,
-            title: {
-              enabled: true,
-              text: 'Width (Meters)'
-            }
         },
         yAxis: {
         		gridLineColor: '#707073',
-            title: {
-          		enabled: true,
-              text: 'Length (Meters)'
-            }
         },
         plotOptions: {
             scatter: {
@@ -180,6 +181,8 @@ angular.module('liteTech.controller', ['liteTech.service'])
         }]
 
     });
+		},500);
+
 };
 
 

@@ -7,26 +7,29 @@ body{
 	font-family: "Roboto Light";
 	overflow: scroll;
 }
-/*.select-list::before{
+.select-list::before{
 	content: "";
 	position: absolute;
 	top: 0;
-	left: 20%;
+	left: 12%;
 	height: 100%;
 	width: 1px;
 	background: #01B600;
-}*/
+}
 .select-list a.item{
 	border: none;
-	padding: 2% 16px;
+	/*padding: 2% 16px;*/
 	background: transparent;
-	/*display: table;*/
+	height: 30%;
+}
+.select-list a.item:first-child{
+	margin: 8% 0 0 0;
 }
 
 .select-list img{
 	max-width: 20%;
 	height: auto;
-	min-width: 90px;
+	min-width: 120px;
 	border-radius: 20%;
 	float: left;
 }
@@ -230,7 +233,9 @@ body{
 	padding: 12px 0;
 	margin: 0;
 }
-
+.color-selection{
+	margin: -10px 0 20px 0;
+}
 .color-selection label.button{
 	padding: 0;
 	background: #7ed346;
@@ -257,7 +262,17 @@ body{
 	background: #7ed346;
 }
 .fixture-count{
-	margin-top:-30px;
+	margin-top:-40px;
+}
+.fixture-count p, .color-selection p{
+	text-align: center;
+	font-size: 1em;
+	font-family: "Roboto Light"
+}
+.fixture-count p span{
+	width: 48%;
+	text-align: center;
+	display: inline-block;
 }
 .fixture-count .button-bar a.button{
 	background: #7ed346;
@@ -305,13 +320,35 @@ body{
 	top: 45%;
 	font-size: 3em;
 }
+@media (max-width: 650px) {
+	.select-list::before{
+		left: 12.5%;
+	}
+}
 @media (max-width: 600px) {
-	.select-list a.item{
-		padding: 7% 16px;
+	.select-list::before{
+		left: 75px;
+	}
+	.select-list a.item:first-child{
+		margin: 10% 0 0 0;
 	}
 	.select-list .text-wrap{
-		padding: 30px 0 0 10px;
+		padding: 45px 0 0 10px;
 	}
+}
+@media (max-width: 350px) {
+	.select-list::before{
+		left: 60px;
+	}
+	.select-list a.item:first-child{
+		margin: 18% 0 0 0;
+	}
+	.select-list img{
+		min-width: 90px;
+	}
+	.select-list .text-wrap{
+		padding: 29px 0 0 10px;
+	}	
 }
 
 
@@ -329,7 +366,7 @@ body{
 	stroke-width:0;
 	opacity: 0;	
 }
-.highcharts-title, .highcharts-legend, .highcharts-container > svg > text{
+.highcharts-title, .highcharts-legend, .highcharts-container > svg > text, .highcharts-axis, .highcharts-axis-labels.highcharts-xaxis-labels, .highcharts-axis-labels.highcharts-yaxis-labels{
 	display: none !important;
 }
 

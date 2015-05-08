@@ -256,6 +256,9 @@ body{
 .color-selection .item-radio input:checked ~ .item-content{
 	background: #7ed346;
 }
+.fixture-count{
+	margin-top:-30px;
+}
 .fixture-count .button-bar a.button{
 	background: #7ed346;
 	min-height: 30px;
@@ -312,7 +315,23 @@ body{
 }
 
 
-
+/*High Charts*/
+#container{
+	min-width: 100%; 
+	max-width: 100%; 
+	height: 70vh; 
+	margin: 20px auto 0;
+}
+#container .highcharts-container > svg{
+	height: 90% !important;
+}
+#container .highcharts-container > svg > .highcharts-axis path{
+	stroke-width:0;
+	opacity: 0;	
+}
+.highcharts-title, .highcharts-legend, .highcharts-container > svg > text{
+	display: none !important;
+}
 
 
 
