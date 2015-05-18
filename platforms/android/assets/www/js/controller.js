@@ -91,7 +91,6 @@ angular.module('liteTech.controller', ['liteTech.service'])
 	};
 
   $scope.plotGraph = function () {  	
-  	console.log('Here');
 	$scope.graphData.maxSpace = 1.25;
 	$scope.graphData.noOfRows = Math.round($scope.graphData.roomWidth/$scope.graphData.maxSpace);
 	$scope.graphData.fixturesInRow = Math.round($scope.graphData.fixtures/$scope.graphData.noOfRows);
@@ -102,7 +101,7 @@ angular.module('liteTech.controller', ['liteTech.service'])
 
 	var _rowPosition = $scope.graphData.axialSpace/2;
 	for(var y = 0 ; y < $scope.graphData.noOfRows ; y++){
-		var _colposition = $scope.graphData.traverseSpace/2;
+		var _colposition = $scope.graphData.traverseSpace/3;
 		for(var z = 0 ; z < $scope.graphData.fixturesInRow ; z++){
 			var _data=[];
 			_data[0] = _rowPosition;
@@ -113,13 +112,21 @@ angular.module('liteTech.controller', ['liteTech.service'])
 		_rowPosition = _rowPosition+ $scope.graphData.traverseSpace;
 	}
 
+	setTimeout(
+		function(){
     $('#container').highcharts({
         chart: {
             type: 'scatter',
             plotBorderWidth: 1,
             zoomType: 'xy',
+         //    spacingBottom: 10,
+	        // spacingTop: 10,
+	        // spacingLeft: 10,
+	        // spacingRight: 10,
+	        marginLeft: 8,
+	        marginTop:17,
             backgroundColor: {
-		         	linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+		       	linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
 		          stops: [
 		            [0, '#2a2a2b'],
 		            [1, '#3e3e40']
@@ -127,7 +134,10 @@ angular.module('liteTech.controller', ['liteTech.service'])
 		      	},
 				    style: {
 				      fontFamily: "Roboto Regular"
-				    },
+				    }
+        },
+        credits: {
+            enabled: false
         },
         subtitle: {
 		      style: {
@@ -136,18 +146,11 @@ angular.module('liteTech.controller', ['liteTech.service'])
 		   	},
         xAxis: {
         		gridLineColor: '#707073',
-        		gridLineWidth: 1,
-            title: {
-              enabled: true,
-              text: 'Width (Meters)'
-            }
+        		gridLineWidth: 0,
         },
         yAxis: {
         		gridLineColor: '#707073',
-            title: {
-          		enabled: true,
-              text: 'Length (Meters)'
-            }
+        		gridLineWidth: 0,
         },
         plotOptions: {
             scatter: {
@@ -171,14 +174,23 @@ angular.module('liteTech.controller', ['liteTech.service'])
                     headerFormat: '<b>Light position</b><br>', 
                     pointFormat: '{point.x} Meters, {point.y} Meters'
                 }
-            }
+            },
+            shadow: {
+	            color: '#FFF',
+	            width: 5,
+	            opacity: 0.15,
+	            offsetY: -1,
+	            offsetX: 1
+	        }
         },
         series: [{
             color:'rgba(119, 152, 191, .5)',
-            data: $scope.graphData.plotData,
+            data: $scope.graphData.plotData
         }]
 
     });
+		},500);
+
 };
 
 

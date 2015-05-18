@@ -362,6 +362,10 @@ body{
 #container .highcharts-container > svg{
 	height: 90% !important;
 }
+
+#container .highcharts-container > svg > rect{
+	stroke-width:0;
+}
 #container .highcharts-container > svg > .highcharts-axis path{
 	stroke-width:0;
 	opacity: 0;	
@@ -370,6 +374,9 @@ body{
 	display: none !important;
 }
 
+.highcharts-markers.highcharts-tracker path{
+	-webkit-filter: drop-shadow(12px 12px 7px rgba(255,255,255,0.5));
+}
 
 
 
