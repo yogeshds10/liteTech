@@ -21,7 +21,7 @@ angular.module('liteTech.controller', ['liteTech.service'])
 
 	$scope.showPopup = function (rd){
 	  myPopup = $ionicPopup.show({
-	    template: '<div class="popup-wrapper"><a class="close-popup" ng-click="popupClose()">X</a><p class="popup-title">'+rd.model_no+'<span>('+rd.category+')</span></p><img src="'+rd.img_url+'" alt="'+rd.model_no+'"><div class="row"><div class="col-title">Input Power</div><div class="col-data">'+rd.input_power+' W</div></div><div class="row"><div class="col-title">Input Voltage</div><div class="col-data">'+rd.input_voltage+' V</div></div><div class="row"><div class="col-title">Driver Efficiency</div><div class="col-data">>'+rd.driver_efficiency+'%</div></div><div class="row"><div class="col-title">Color</div><div class="col-data">'+rd.color+'</div></div><div class="row"><div class="col-title">CRI</div><div class="col-data">'+rd.cri+'</div></div><div class="row"><div class="col-title">Light Output</div><div class="col-data">'+rd.light_output+'</div></div></div>',
+	    template: '<div class="popup-wrapper"><a class="close-popup" ng-click="popupClose()"></a><p class="popup-title">'+rd.model_no+'<span>('+rd.category+')</span></p><img src="'+rd.img_url+'" alt="'+rd.model_no+'"><div class="row"><div class="col-title">Input Power</div><div class="col-data">'+rd.input_power+' W</div></div><div class="row"><div class="col-title">Input Voltage</div><div class="col-data">'+rd.input_voltage+' V</div></div><div class="row"><div class="col-title">Driver Efficiency</div><div class="col-data">>'+rd.driver_efficiency+'%</div></div><div class="row"><div class="col-title">Color</div><div class="col-data">'+rd.color+'</div></div><div class="row"><div class="col-title">CRI</div><div class="col-data">'+rd.cri+'</div></div><div class="row"><div class="col-title">Light Output</div><div class="col-data">'+rd.light_output+'</div></div></div>',
 	    scope: $scope,
 	    buttons: [
 	      {
@@ -116,25 +116,21 @@ angular.module('liteTech.controller', ['liteTech.service'])
 		function(){
     $('#container').highcharts({
         chart: {
-            type: 'scatter',
-            plotBorderWidth: 1,
-            zoomType: 'xy',
-         //    spacingBottom: 10,
-	        // spacingTop: 10,
-	        // spacingLeft: 10,
-	        // spacingRight: 10,
-	        marginLeft: 8,
-	        marginTop:17,
-            backgroundColor: {
-		       	linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
-		          stops: [
-		            [0, '#2a2a2b'],
-		            [1, '#3e3e40']
-		         	]
-		      	},
-				    style: {
-				      fontFamily: "Roboto Regular"
-				    }
+          type: 'scatter',
+          plotBorderWidth: 1,
+          zoomType: 'xy',
+          marginLeft: 8,
+          marginTop:17,
+          backgroundColor: {
+         	  linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+            stops: [
+              [0, '#2a2a2b'],
+              [1, '#3e3e40']
+           	]
+        	},
+  		    style: {
+  		      fontFamily: "Roboto Regular"
+  		    },
         },
         credits: {
             enabled: false
@@ -153,45 +149,48 @@ angular.module('liteTech.controller', ['liteTech.service'])
         		gridLineWidth: 0,
         },
         plotOptions: {
-            scatter: {
-                marker: {
-                    radius: 5,
-                    states: {
-                        hover: {
-                            enabled: true,
-                            lineColor: 'rgb(100,100,100)'
-                        }
-                    }
-                },
-                states: {
-                    hover: {
-                        marker: {
-                            enabled: false
-                        }
-                    }
-                },
-                 tooltip: {
-                    headerFormat: '<b>Light position</b><br>', 
-                    pointFormat: '{point.x} Meters, {point.y} Meters'
-                }
+          scatter: {
+            marker: {
+              radius: 5,
+              states: {
+                  hover: {
+                      enabled: true,
+                      lineColor: 'rgb(100,100,100)'
+                  }
+              }
             },
-            shadow: {
-	            color: '#FFF',
+            states: {
+              hover: {
+                  marker: {
+                    enabled: false
+                  }
+              }
+            },
+             tooltip: {
+                headerFormat: '<b>Light position</b><br>', 
+                pointFormat: '{point.x} Meters, {point.y} Meters'
+            }
+          },
+          series: {
+          	shadow: {
+	            color: '#e34a33',
 	            width: 5,
 	            opacity: 0.15,
 	            offsetY: -1,
 	            offsetX: 1
-	        }
+        	  }
+          }
         },
         series: [{
             color:'rgba(119, 152, 191, .5)',
-            data: $scope.graphData.plotData
+            data: $scope.graphData.plotData,
+            draggableY: true,
+            draggableX: true,
         }]
 
     });
 		},500);
 
 };
-
 
 }]);

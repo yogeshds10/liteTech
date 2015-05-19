@@ -1,6 +1,16 @@
 body{
 	font-family: "Roboto Regular";
 }
+
+.back{
+	height: 20px;
+	width: 20px;
+	background: url('../img/back.png') no-repeat center center;
+}
+
+.popupClose{
+
+}
 /*Home Screen*/
 .select-list{
 	position: relative;
@@ -58,7 +68,7 @@ body{
 .res-header a{
 	position: absolute;
 	left: 20px;
-	top: 9px;
+	top: 12px;
 	font-size: 2em;
 	color: #fff;
 }
@@ -122,7 +132,7 @@ body{
 	padding: 1px;
 }
 .thumb-img-wrap .selectedImg img{
-	border: 1px solid #7ed346;
+	border: 5px solid #7ed346;
 }
 .thumb-img-wrap span{
 	display: block;
@@ -132,6 +142,7 @@ body{
 	font-size: 0.8em;
 	color: #999;
 	font-family: "Roboto Light";
+	text-transform: uppercase;
 }
 
 .residence-wrap .button-next{
@@ -180,9 +191,14 @@ body{
 .close-popup{
 	text-align: right;
 	display: block;
-	margin: -5px 0px 0 0px;
+	margin: -6px 0px 0 0px;
 	color: #999;
 	cursor: pointer;
+	height: 22px;
+	width: 22px;
+	background: url('../img/close.png') no-repeat center center;	
+	background-size: contain;
+	float: right;
 }
 .popup-title{
 	text-transform: uppercase;
@@ -222,7 +238,7 @@ body{
 .result-header a{
 	position: absolute;
 	left: 20px;
-	top: 9px;
+	top: 12px;
 	font-size: 2em;
 	color: #fff;
 }
