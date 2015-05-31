@@ -70,7 +70,7 @@ angular.module('liteTech.controller', ['liteTech.service'])
 		$scope.graphData.color = color;
 		$scope.graphData.roomLength = Math.round($scope.selections.length/3.28);
 		$scope.graphData.roomWidth = Math.round($scope.selections.width/3.28);
-		$scope.graphData.roomHeight = Math.round($scope.selections.height/3.28);
+		$scope.graphData.roomHeight = Math.round($scope.selections.height);
 		$scope.graphData.luminen = parseInt($scope.selections.luminenSet[color]);
 		$scope.graphData.fixtures = Math.round(($scope.optimumFlux * $scope.graphData.roomLength * $scope.graphData.roomWidth) / (0.63 * 0.69 * $scope.graphData.luminen));				
 		$scope.fixtureFlux = $scope.optimumFlux/$scope.graphData.fixtures;
@@ -97,6 +97,8 @@ angular.module('liteTech.controller', ['liteTech.service'])
 	$scope.graphData.axialSpace = $scope.graphData.roomLength/$scope.graphData.fixturesInRow;
 	$scope.graphData.traverseSpace = $scope.graphData.roomWidth/$scope.graphData.noOfRows;
 
+	console.log($scope.graphData);
+
 	$scope.graphData.plotData = [];
 
 	var _rowPosition = $scope.graphData.axialSpace/2;
@@ -118,14 +120,13 @@ angular.module('liteTech.controller', ['liteTech.service'])
         chart: {
           type: 'scatter',
           plotBorderWidth: 1,
-          zoomType: 'xy',
           marginLeft: 8,
           marginTop:17,
           backgroundColor: {
          	  linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
             stops: [
-              [0, '#2a2a2b'],
-              [1, '#3e3e40']
+              [0, '#fff'],
+              [1, '#fff']
            	]
         	},
   		    style: {
@@ -151,7 +152,7 @@ angular.module('liteTech.controller', ['liteTech.service'])
         plotOptions: {
           scatter: {
             marker: {
-              radius: 5,
+              radius: ($scope.graphData.roomHeight*1.73)*2,
               states: {
                   hover: {
                       enabled: true,
@@ -166,30 +167,45 @@ angular.module('liteTech.controller', ['liteTech.service'])
                   }
               }
             },
-             tooltip: {
+            tooltip: {
                 headerFormat: '<b>Light position</b><br>', 
                 pointFormat: '{point.x} Meters, {point.y} Meters'
             }
           },
-          series: {
-          	shadow: {
-	            color: '#e34a33',
-	            width: 5,
-	            opacity: 0.15,
-	            offsetY: -1,
-	            offsetX: 1
-        	  }
-          }
         },
         series: [{
-            color:'rgba(119, 152, 191, .5)',
+            // color:'rgba(119, 152, 191, .05)',
+            color : {
+            	radialGradient: { cx: 0.5, cy: 0.5, r: 0.5 },
+            	stops: [
+	                [0, '#2ca25f'],
+	                [1, '#e5f5f9'] 
+            	]
+            },
             data: $scope.graphData.plotData,
             draggableY: true,
             draggableX: true,
+            dragMinY:$scope.graphData.traverseSpace/3,
+            dragMinX:$scope.graphData.axialSpace/2,
+            shadow: {
+	            color: '#fff',
+	            width: 100,
+	            opacity: 1,
+	            offsetY: -1,
+	            offsetX: 1
+	    			},
         }]
 
     });
-		},500);
+	
+	// var filterStyle = '<filter id="f1" x="0" y="0" width="200%" height="200%"><feOffset result="offOut" in="SourceGraphic" dx="20" dy="20" /><feGaussianBlur result="blurOut" in="offOut" stdDeviation="10" /><feBlend in="SourceGraphic" in2="blurOut" mode="normal" /></filter>';
+
+	var pathCount = $('svg .highcharts-markers.highcharts-tracker').each(function(){
+		var res = this;
+		$(res).find('path').css({'stroke':'rgba(255,255,255,0.02)','stroke-width':'0','-webkit-filter':'drop-shadow(12px 12px 7px rgba(255,255,255,0.5)'});
+	});
+
+	},500);
 
 };
 

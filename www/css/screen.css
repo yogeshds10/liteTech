@@ -278,7 +278,6 @@ body{
 	background: #7ed346;
 }
 .fixture-count{
-	margin-top:-40px;
 }
 .fixture-count p, .color-selection p{
 	text-align: center;
@@ -367,16 +366,18 @@ body{
 	}	
 }
 
+#container svg{
+	background: #212125;
+}
 
 /*High Charts*/
 #container{
-	min-width: 100%; 
-	max-width: 100%; 
-	height: 70vh; 
 	margin: 20px auto 0;
 }
 #container .highcharts-container > svg{
 	height: 90% !important;
+	border-top:1px solid #000;
+	border-bottom: 1px solid #000;
 }
 
 #container .highcharts-container > svg > rect{
@@ -389,11 +390,6 @@ body{
 .highcharts-title, .highcharts-legend, .highcharts-container > svg > text, .highcharts-axis, .highcharts-axis-labels.highcharts-xaxis-labels, .highcharts-axis-labels.highcharts-yaxis-labels{
 	display: none !important;
 }
-
-.highcharts-markers.highcharts-tracker path{
-	-webkit-filter: drop-shadow(12px 12px 7px rgba(255,255,255,0.5));
-}
-
 
 
 
