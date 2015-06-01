@@ -90,151 +90,159 @@ angular.module('liteTech.controller', ['liteTech.service'])
 		$scope.plotGraph();
 	};
 
+	$scope.showShadow = function (){
+		$('.shadow').css("display","block");
+	};
+
+	$scope.hideShadow = function (){
+		$('.shadow').css("display","none");
+	};
+
   $scope.plotGraph = function () {  	
-	$scope.graphData.maxSpace = 1.5;
-	$scope.graphData.noOfRows = Math.round($scope.graphData.roomWidth/$scope.graphData.maxSpace);
-	$scope.graphData.fixturesInRow = Math.round($scope.graphData.fixtures/$scope.graphData.noOfRows);
-	$scope.graphData.axialSpace = $scope.graphData.roomLength/$scope.graphData.fixturesInRow;
-	$scope.graphData.traverseSpace = $scope.graphData.roomWidth/$scope.graphData.noOfRows;
+		$scope.graphData.maxSpace = 1.5;
+		$scope.graphData.noOfRows = Math.round($scope.graphData.roomWidth/$scope.graphData.maxSpace);
+		$scope.graphData.fixturesInRow = Math.round($scope.graphData.fixtures/$scope.graphData.noOfRows);
+		$scope.graphData.axialSpace = $scope.graphData.roomLength/$scope.graphData.fixturesInRow;
+		$scope.graphData.traverseSpace = $scope.graphData.roomWidth/$scope.graphData.noOfRows;
 
-	$scope.graphData.plotData = [];
+		$scope.graphData.plotData = [];
 
-	// var _rowPosition = $scope.graphData.axialSpace/2;
-	// for(var y = 0 ; y < $scope.graphData.noOfRows ; y++){
-	// 	var _colposition = $scope.graphData.traverseSpace/3;
-	// 	for(var z = 0 ; z < $scope.graphData.fixturesInRow ; z++){
-	// 		var _data={};
-	// 		_data.x = _rowPosition;
-	// 		_data.y = _colposition;
-	// 		$scope.graphData.plotData.push(_data);
-	// 		_colposition = _colposition + $scope.graphData.axialSpace;
-	// 	}
-	// 	_rowPosition = _rowPosition+ $scope.graphData.traverseSpace;
-	// }
+		// var _rowPosition = $scope.graphData.axialSpace/2;
+		// for(var y = 0 ; y < $scope.graphData.noOfRows ; y++){
+		// 	var _colposition = $scope.graphData.traverseSpace/3;
+		// 	for(var z = 0 ; z < $scope.graphData.fixturesInRow ; z++){
+		// 		var _data={};
+		// 		_data.x = _rowPosition;
+		// 		_data.y = _colposition;
+		// 		$scope.graphData.plotData.push(_data);
+		// 		_colposition = _colposition + $scope.graphData.axialSpace;
+		// 	}
+		// 	_rowPosition = _rowPosition+ $scope.graphData.traverseSpace;
+		// }
 
-	$scope.graphData.column = Math.round($scope.graphData.fixtures / $scope.graphData.fixturesInRow);
+		$scope.graphData.column = Math.round($scope.graphData.fixtures / $scope.graphData.fixturesInRow);
 
-	var _rowPosition = $scope.graphData.axialSpace;
-	for(var y = 0 ; y < $scope.graphData.fixturesInRow ; y++){
-		var _colposition = $scope.graphData.traverseSpace;
-		for(var z = 0 ; z < $scope.graphData.column ; z++){
-			var _data={};
-			_data.y = _rowPosition;
-			_data.x = _colposition;
-			$scope.graphData.plotData.push(_data);
-			_colposition = _colposition + $scope.graphData.axialSpace;
+		var _rowPosition = $scope.graphData.axialSpace;
+		for(var y = 0 ; y < $scope.graphData.fixturesInRow ; y++){
+			var _colposition = $scope.graphData.traverseSpace;
+			for(var z = 0 ; z < $scope.graphData.column ; z++){
+				var _data={};
+				_data.y = _rowPosition;
+				_data.x = _colposition;
+				$scope.graphData.plotData.push(_data);
+				_colposition = _colposition + $scope.graphData.axialSpace;
+			}
+			_rowPosition = _rowPosition+ $scope.graphData.traverseSpace;
 		}
-		_rowPosition = _rowPosition+ $scope.graphData.traverseSpace;
-	}
 
 
-	setTimeout(function(){
-		d3.select('#container svg').remove();
+		setTimeout(function(){
+			d3.select('#container svg').remove();
 
-		var height = (window.innerHeight * 80)/100,
-	      width = window.innerWidth,
-	      radius = 5,
-	      outerRadius = ((window.innerHeight * 80)/100 / $scope.graphData.fixturesInRow),
-	      padding = ((window.innerHeight * 80)/100 / $scope.graphData.fixturesInRow/2);
-	      console.log(outerRadius);
+			var height = (window.innerHeight * 80)/100,
+		      width = window.innerWidth,
+		      radius = 5,
+		      outerRadius = ((window.innerHeight * 80)/100 / $scope.graphData.fixturesInRow),
+		      padding = ((window.innerHeight * 80)/100 / $scope.graphData.fixturesInRow/2);
+		      console.log(outerRadius);
 
-	  var margins = {
-	    "left": 10,
-	    "right": 10,
-	    "top": 10,
-	    "bottom": 10
-	  };
+		  var margins = {
+		    "left": 10,
+		    "right": 10,
+		    "top": 10,
+		    "bottom": 10
+		  };
 
-	  var drag = d3.behavior.drag()
-	  .origin(function(d) { return d; })
-	  .on("drag", dragmove);
+		  var drag = d3.behavior.drag()
+		  .origin(function(d) { return d; })
+		  .on("drag", dragmove);
 
-	  var svg = d3.select("#container")
-	            .append("svg")
-	            .attr("width", width)
-	            .attr("height", height)
-	            .append("g")
-	            .attr("transform", "translate(" + 0 + "," + 0 + ")");
-
-
-	  var x = d3.scale.linear()
-	          .domain(d3.extent($scope.graphData.plotData, function (d) {
-	            return d.x;
-	          }))
-	          .range([padding , width - padding]);
-
-	  var y = d3.scale.linear()
-	      .domain(d3.extent($scope.graphData.plotData, function (d) {
-	          return d.y;
-	      }))
-	      .range([height - padding, padding]);
+		  var svg = d3.select("#container")
+		            .append("svg")
+		            .attr("width", width)
+		            .attr("height", height)
+		            .append("g")
+		            .attr("transform", "translate(" + 0 + "," + 0 + ")");
 
 
-	   // Define the gradient
-	    var gradient = svg.append("svg:defs")
-	        .append("svg:radialGradient")
-	        .attr("id", "gradient")
-	        .attr("fx", "50%")
-	        .attr("fy", "50%")
-	        .attr("r", "50%")
-	        .attr("spreadMethod", "pad");
+		  var x = d3.scale.linear()
+		          .domain(d3.extent($scope.graphData.plotData, function (d) {
+		            return d.x;
+		          }))
+		          .range([padding , width - padding]);
 
-	    // Define the gradient colors
-	    gradient.append("svg:stop")
-	        .attr("offset", "0%")
-	        .attr("stop-color", "#ffffff")
-	        .attr("stop-opacity", 1);
-
-	    gradient.append("svg:stop")
-	        .attr("offset", "100%")
-	        .attr("stop-color", "#ffffff")
-	        .attr("stop-opacity", 0);
+		  var y = d3.scale.linear()
+		      .domain(d3.extent($scope.graphData.plotData, function (d) {
+		          return d.y;
+		      }))
+		      .range([height - padding, padding]);
 
 
-	    var groups = svg.selectAll("g.node")
-	        .data($scope.graphData.plotData)
-	        .enter().append("g")
-	        .classed("node", true)
-	        .attr("z-index", "-1")
-	        .attr('transform', function (d) {
-	          return "translate(" + x(d.x) + "," + y(d.y) + ")";
-	        });
+		   // Define the gradient
+		    var gradient = svg.append("svg:defs")
+		        .append("svg:radialGradient")
+		        .attr("id", "gradient")
+		        .attr("fx", "50%")
+		        .attr("fy", "50%")
+		        .attr("r", "50%")
+		        .attr("spreadMethod", "pad");
 
-	    groups.append("circle")
-	    .attr("r", outerRadius)
-	    .attr("cx", function(d) { return d.x; })
-	    .attr("cy", function(d) { return d.y; })
-	    .attr('fill', 'url(#gradient)')
-	    .attr("z-index", "-1")
-	    .classed('shadow', true);
+		    // Define the gradient colors
+		    gradient.append("svg:stop")
+		        .attr("offset", "0%")
+		        .attr("stop-color", "#ffffff")
+		        .attr("stop-opacity", 1);
 
-	    groups.append("circle")
-	    .attr("r", radius)
-	    .attr("cx", function(d) { return d.x; })
-	    .attr("cy", function(d) { return d.y; })
-	    .attr("z-index", "100")
-	    .style("fill", '#7fd347')
-	    .call(drag);
+		    gradient.append("svg:stop")
+		        .attr("offset", "100%")
+		        .attr("stop-color", "#ffffff")
+		        .attr("stop-opacity", 0);
 
-	    function dragmove(d) {
-	      d3.select(this)
-	      .attr("cx", d.x = d3.event.x)
-	      .attr("cy", d.y = d3.event.y);
 
-	    var shadowNode = this.parentNode.querySelector('.shadow');
+		    var groups = svg.selectAll("g.node")
+		        .data($scope.graphData.plotData)
+		        .enter().append("g")
+		        .classed("node", true)
+		        .attr("z-index", "-1")
+		        .attr('transform', function (d) {
+		          return "translate(" + x(d.x) + "," + y(d.y) + ")";
+		        });
 
-	    d3.select(shadowNode)
-	      .attr("cx", d.x = d3.event.x)
-	      .attr("cy", d.y = d3.event.y);
+		    groups.append("circle")
+		    .attr("r", outerRadius)
+		    .attr("cx", function(d) { return d.x; })
+		    .attr("cy", function(d) { return d.y; })
+		    .attr('fill', 'url(#gradient)')
+		    .attr("z-index", "-1")
+		    .classed('shadow', true);
 
-	    var groundNode = this.parentNode.querySelector('.node');
-	    d3.select(groundNode)
-	      .attr("transform", function () {
-	          return "translate(" + d3.event.x + "," + d3.event.y + ")";
-	      });
-	  }
-	},500);
+		    groups.append("circle")
+		    .attr("r", radius)
+		    .attr("cx", function(d) { return d.x; })
+		    .attr("cy", function(d) { return d.y; })
+		    .attr("z-index", "100")
+		    .style("fill", '#7fd347')
+		    .call(drag);
 
-};
+		    function dragmove(d) {
+		      d3.select(this)
+		      .attr("cx", d.x = d3.event.x)
+		      .attr("cy", d.y = d3.event.y);
+
+		    var shadowNode = this.parentNode.querySelector('.shadow');
+
+		    d3.select(shadowNode)
+		      .attr("cx", d.x = d3.event.x)
+		      .attr("cy", d.y = d3.event.y);
+
+		    var groundNode = this.parentNode.querySelector('.node');
+		    d3.select(groundNode)
+		      .attr("transform", function () {
+		          return "translate(" + d3.event.x + "," + d3.event.y + ")";
+		      });
+		  }
+		},500);
+
+  };
 
 }]);

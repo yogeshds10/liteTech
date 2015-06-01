@@ -278,7 +278,6 @@ body{
 	background: #7ed346;
 }
 .fixture-count{
-	margin-top:-40px;
 }
 .fixture-count p, .color-selection p{
 	text-align: center;
@@ -367,12 +366,12 @@ body{
 	}	
 }
 
+#container svg{
+	background: #212125;
+}
 
 /*High Charts*/
 #container{
-	min-width: 100%; 
-	max-width: 100%; 
-	height: 70vh; 
 	margin: 20px auto 0;
 }
 #container .highcharts-container > svg{
