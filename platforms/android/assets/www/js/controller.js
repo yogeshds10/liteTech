@@ -9,19 +9,36 @@ angular.module('liteTech.controller', ['liteTech.service'])
 	$scope.currentAvgFlux = 0;
 	$scope.optimumFlux = 250;
 	$scope.fixtureFlux = 0;
-	
-	liteTechService.getResidence().then(function (response){
-		$scope.residence.data = response.data;
-		for(x in $scope.residence.data){
-			$scope.residence.data[x].selected = false;
+
+	$scope.category = function(cat){
+		if(cat === "residence"){
+			liteTechService.getResidence().then(function (response){
+				$scope.residence.data = response.data;
+				for(x in $scope.residence.data){
+					$scope.residence.data[x].selected = false;
+				}
+			}, function (response){
+				$scope.validateMsg = 'Failed to fetch residence data !!!';
+			});
+		}else if(cat === 'commercial'){
+			liteTechService.getCommercial().then(function (response){
+				$scope.residence.data = response.data;
+				for(x in $scope.residence.data){
+					$scope.residence.data[x].selected = false;
+				}
+			}, function (response){
+				$scope.validateMsg = 'Failed to fetch residence data !!!';
+			});
 		}
-	}, function (response){
-		$scope.validateMsg = 'Failed to fetch residence data !!!';
-	});
+	};
+	
+	
+
+	
 
 	$scope.showPopup = function (rd){
 	  myPopup = $ionicPopup.show({
-	    template: '<div class="popup-wrapper"><a class="close-popup" ng-click="popupClose()"></a><p class="popup-title">'+rd.model_no+'<span>('+rd.category+')</span></p><img src="'+rd.img_url+'" alt="'+rd.model_no+'"><div class="row"><div class="col-title">Input Power</div><div class="col-data">'+rd.input_power+' W</div></div><div class="row"><div class="col-title">Input Voltage</div><div class="col-data">'+rd.input_voltage+' V</div></div><div class="row"><div class="col-title">Driver Efficiency</div><div class="col-data">>'+rd.driver_efficiency+'%</div></div><div class="row"><div class="col-title">Color</div><div class="col-data">'+rd.color+'</div></div><div class="row"><div class="col-title">CRI</div><div class="col-data">'+rd.cri+'</div></div><div class="row"><div class="col-title">Light Output</div><div class="col-data">'+rd.light_output+'</div></div></div>',
+	    template: '<div class="popup-wrapper"><a class="close-popup" ng-click="popupClose()"></a><p class="popup-title">'+rd.model_no+'<span>('+rd.category+')</span></p><div class="pop-inner-wrapper"><img src="'+rd.img_url+'" alt="'+rd.model_no+'"><div class="row"><div class="col-title">Input Power</div><div class="col-data">'+rd.input_power+' W</div></div><div class="row"><div class="col-title">Input Voltage</div><div class="col-data">'+rd.input_voltage+' V</div></div><div class="row"><div class="col-title">Driver Efficiency</div><div class="col-data">>'+rd.driver_efficiency+'%</div></div><div class="row"><div class="col-title">Color</div><div class="col-data">'+rd.color+'</div></div><div class="row"><div class="col-title">CRI</div><div class="col-data">'+rd.cri+'</div></div><div class="row"><div class="col-title">Light Output</div><div class="col-data">'+rd.light_output+'</div></div></div></div>',
 	    scope: $scope,
 	    buttons: [
 	      {
@@ -68,6 +85,7 @@ angular.module('liteTech.controller', ['liteTech.service'])
 
 	$scope.calculateFlux = function (color){
 		$scope.graphData.color = color;
+		$scope.graphData.model = $scope.selections.model;
 		$scope.graphData.roomLength = Math.round($scope.selections.length/3.28);
 		$scope.graphData.roomWidth = Math.round($scope.selections.width/3.28);
 		$scope.graphData.roomHeight = Math.round($scope.selections.height);
@@ -90,21 +108,31 @@ angular.module('liteTech.controller', ['liteTech.service'])
 		$scope.plotGraph();
 	};
 
-	$scope.showShadow = function (){
-		$('.shadow').css("display","block");
-	};
+	$scope.graphData.isDrag = true;
+	$scope.dragFixtures = function(){
+		$('.shadow').fadeToggle();
+	  $('.tick line').fadeToggle();
+	  if($scope.graphData.isDrag){
+	  	$('.drag-button div').html("Done");
+	  	$('.drag-button div').css("background","#7ed346");
+	  	$('.dragdot').attr('r','15');
+	  	$scope.graphData.isDrag = false;
+	  }else{
+	  	$('.drag-button div').html("Move Lights");
+	  	$('.drag-button div').css("background","rgb(61,61,61)");
+	  	$('.dragdot').attr('r','10');
+	  	$scope.graphData.isDrag = true;
+	  }
+	}
 
-	$scope.hideShadow = function (){
-		$('.shadow').css("display","none");
-	};
-
-  $scope.plotGraph = function () {  	
+  $scope.plotGraph = function () {  
+  	$scope.graphData.isDrag = false;
+  	$scope.dragFixtures();
 		$scope.graphData.maxSpace = 1.5;
 		$scope.graphData.noOfRows = Math.round($scope.graphData.roomWidth/$scope.graphData.maxSpace);
 		$scope.graphData.fixturesInRow = Math.round($scope.graphData.fixtures/$scope.graphData.noOfRows);
 		$scope.graphData.axialSpace = $scope.graphData.roomLength/$scope.graphData.fixturesInRow;
 		$scope.graphData.traverseSpace = $scope.graphData.roomWidth/$scope.graphData.noOfRows;
-
 		$scope.graphData.plotData = [];
 
 		// var _rowPosition = $scope.graphData.axialSpace/2;
@@ -135,16 +163,14 @@ angular.module('liteTech.controller', ['liteTech.service'])
 			_rowPosition = _rowPosition+ $scope.graphData.traverseSpace;
 		}
 
-
 		setTimeout(function(){
 			d3.select('#container svg').remove();
 
 			var height = (window.innerHeight * 80)/100,
 		      width = window.innerWidth,
-		      radius = 5,
+		      radius = 10,
 		      outerRadius = ((window.innerHeight * 80)/100 / $scope.graphData.fixturesInRow),
-		      padding = ((window.innerHeight * 80)/100 / $scope.graphData.fixturesInRow/2);
-		      console.log(outerRadius);
+		      padding = ((window.innerHeight * 80)/100 / $scope.graphData.fixturesInRow/3);
 
 		  var margins = {
 		    "left": 10,
@@ -155,6 +181,10 @@ angular.module('liteTech.controller', ['liteTech.service'])
 
 		  var drag = d3.behavior.drag()
 		  .origin(function(d) { return d; })
+		  .on("dragstart", function(){
+		  	d3.event.sourceEvent.stopPropagation();
+    		d3.event.sourceEvent.preventDefault();
+		  })
 		  .on("drag", dragmove);
 
 		  var svg = d3.select("#container")
@@ -163,7 +193,6 @@ angular.module('liteTech.controller', ['liteTech.service'])
 		            .attr("height", height)
 		            .append("g")
 		            .attr("transform", "translate(" + 0 + "," + 0 + ")");
-
 
 		  var x = d3.scale.linear()
 		          .domain(d3.extent($scope.graphData.plotData, function (d) {
@@ -177,6 +206,32 @@ angular.module('liteTech.controller', ['liteTech.service'])
 		      }))
 		      .range([height - padding, padding]);
 
+		 //  var xAxis = d3.svg.axis()
+			//     .scale(x)
+			//     .orient("bottom")
+			//     .innerTickSize(-height)
+			//     .outerTickSize(0)
+			//     .tickPadding(0);
+
+			// var yAxis = d3.svg.axis()
+			//     .scale(y)
+			//     .orient("left")
+			//     .innerTickSize(-width)
+			//     .outerTickSize(0)
+			//     .tickPadding(0);
+
+			// var line = d3.svg.line()
+			//     .x(function(d) { return x(d.x); })
+			//     .y(function(d) { return y(d.y); });
+
+			// svg.append("g")
+			//       .attr("class", "x axis")
+			//       .attr("transform", "translate(0," + height + ")")
+			//       .call(xAxis);
+
+		 //  svg.append("g")
+		 //      .attr("class", "y axis")
+		 //      .call(yAxis);
 
 		   // Define the gradient
 		    var gradient = svg.append("svg:defs")
@@ -190,7 +245,7 @@ angular.module('liteTech.controller', ['liteTech.service'])
 		    // Define the gradient colors
 		    gradient.append("svg:stop")
 		        .attr("offset", "0%")
-		        .attr("stop-color", "#ffffff")
+		        .attr("stop-color", "rgba(0,0,0,0.3)")
 		        .attr("stop-opacity", 1);
 
 		    gradient.append("svg:stop")
@@ -213,15 +268,14 @@ angular.module('liteTech.controller', ['liteTech.service'])
 		    .attr("cx", function(d) { return d.x; })
 		    .attr("cy", function(d) { return d.y; })
 		    .attr('fill', 'url(#gradient)')
-		    .attr("z-index", "-1")
 		    .classed('shadow', true);
 
 		    groups.append("circle")
 		    .attr("r", radius)
 		    .attr("cx", function(d) { return d.x; })
 		    .attr("cy", function(d) { return d.y; })
-		    .attr("z-index", "100")
 		    .style("fill", '#7fd347')
+		    .classed('dragdot', true)
 		    .call(drag);
 
 		    function dragmove(d) {
@@ -229,18 +283,18 @@ angular.module('liteTech.controller', ['liteTech.service'])
 		      .attr("cx", d.x = d3.event.x)
 		      .attr("cy", d.y = d3.event.y);
 
-		    var shadowNode = this.parentNode.querySelector('.shadow');
-
-		    d3.select(shadowNode)
+			    var shadowNode = this.parentNode.querySelector('.shadow');
+			    d3.select(shadowNode)
 		      .attr("cx", d.x = d3.event.x)
 		      .attr("cy", d.y = d3.event.y);
 
-		    var groundNode = this.parentNode.querySelector('.node');
-		    d3.select(groundNode)
+			    var groundNode = this.parentNode.querySelector('.node');
+			    d3.select(groundNode)
 		      .attr("transform", function () {
 		          return "translate(" + d3.event.x + "," + d3.event.y + ")";
 		      });
-		  }
+		  	}
+
 		},500);
 
   };

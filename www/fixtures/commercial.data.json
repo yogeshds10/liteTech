@@ -1,0 +1,90 @@
+[
+	{
+		"model_no" : "tle18h",
+		"img_url" : "img/residence/TLE18H.png",
+		"input_power" : "18",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "85",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/70/80",
+		"light_output" : "1800lm/1620lm/1530lm",
+		"category" : "downlight"
+	},
+	{
+		"model_no" : "tle40h",
+		"img_url" : "img/residence/TLE40H.png",
+		"input_power" : "40",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "85",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/70/80",
+		"light_output" : "3600lm/3240lm/2916lm",
+		"category" : "downlight"
+	},
+	{
+		"model_no" : "dler24a",
+		"img_url" : "img/residence/DLER24A.png",
+		"input_power" : "24",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "90",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/70/80",
+		"light_output" : "2160lm/1900lm/1845lm",
+		"category" : "downlight"
+	},
+	{
+		"model_no" : "dler30a",
+		"img_url" : "img/residence/DLER30A.png",
+		"input_power" : "30",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "90",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/70/80",
+		"light_output" : "2700lm/2500lm/2300lm",
+		"category" : "downlight"
+	},
+	{
+		"model_no" : "dles20a",
+		"img_url" : "img/residence/DLES20A.png",
+		"input_power" : "20",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "90",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/70/80",
+		"light_output" : "2000lm/1800lm/1700lm",
+		"category" : "downlight"
+	},
+	{
+		"model_no" : "t5e18h",
+		"img_url" : "img/residence/T5E18H.png",
+		"input_power" : "18",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "90",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/70/80",
+		"light_output" : "1980lm/1780lm/1680lm",
+		"category" : "downlight"
+	},
+	{
+		"model_no" : "bse18h",
+		"img_url" : "img/residence/BSE18H.png",
+		"input_power" : "18",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "90",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/70/80",
+		"light_output" : "2125lm/1900lm/1800lm",
+		"category" : "downlight"
+	},
+	{
+		"model_no" : "t8e16h",
+		"img_url" : "img/residence/T8E18H.png",
+		"input_power" : "18",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "86",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/70/80",
+		"light_output" : "2125lm/1900lm/1800lm",
+		"category" : "downlight"
+	}
+]

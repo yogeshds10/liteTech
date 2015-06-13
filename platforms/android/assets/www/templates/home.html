@@ -1,14 +1,14 @@
 <div class="list select-list">
-	<a ui-sref="residence" class="item">
-		<img src="img/residential.jpg" alt="">
-		<span class="text-wrap">Residence <small>Bed room, Living room, etc</small></span>
+	<a ui-sref="residence" ng-click="category('residence')" class="item">
+		<span class="img-wrap"><img src="img/residential.png" alt=""></span>
+		<span class="text-wrap">Residential <small>Bed room, Living room, etc</small></span>
 	</a>
-  <a ui-sref="home" class="item" >
-		<img src="img/commercial.jpg" alt="">
+  <a ui-sref="commercial" ng-click="category('commercial')" class="item" >
+		<span class="img-wrap"><img src="img/commercial.png" alt=""></span>
 		<span class="text-wrap">Commercial <small>Offices, Conference rooms, etc</small></span>
 	</a>
 	<a ui-sref="home" class="item">
-		<img src="img/industrial.jpg" alt="">
+		<span class="img-wrap"><img src="img/industrial.png" alt=""></span>
 		<span class="text-wrap">Industrial <small>Streets, Terraces, etc</small></span>
 	</a>
 </div>

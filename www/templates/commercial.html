@@ -1,0 +1,37 @@
+<div class="residence-wrap">
+	<div class="res-header">
+		<a ui-sref="home" class="back"></a>
+		<p>commercial</p>
+	</div>
+	<div class="optimum-info">
+		The optimum flux for a commercial is <span>{{optimumFlux}}</span>
+	</div>
+	<div class="dimension-wrap">
+		<p>Enter space dimensions :</p>
+    <div class="input-wrap">
+      <label>Length</label>
+      <input type="number" placeholder="in feet" ng-model="selections.length" min="0"/>  
+    </div>
+    <div class="input-wrap">
+      <label>Width</label>
+      <input type="number" placeholder="in feet" ng-model="selections.width" min="0"/>  
+    </div>
+    <div class="input-wrap">
+      <label>Height</label>
+      <input type="number" placeholder="in feet" ng-model="selections.height" min="0"/>
+    </div>
+	</div>
+  <div class="light-type-wrap">
+    <p>Choose light type</p>
+    <div class="thumb-img-wrap">
+      <ul>
+        <li ng-repeat="rd in residence.data" ng-click="showPopup(rd)" ng-class="{selectedImg : rd.selected}">
+          <img src="{{rd.img_url}}" alt=""/>
+          <span>{{rd.model_no}}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <p class="error-msg">{{validateMsg}}</p>
+  <button class="button button-balanced button-next" ng-click="validate()">Next</button>
+</div>

@@ -37,6 +37,10 @@ angular.module('liteTech', ['ionic','liteTech.controller','liteTech.service','io
     url: "/residence",
     templateUrl : "templates/residence.html"
   })
+  .state('commercial', {
+    url: "/commercial",
+    templateUrl : "templates/commercial.html"
+  })
   .state('result', {
     url: "/result",
     templateUrl : "templates/result.html"

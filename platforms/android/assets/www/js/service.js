@@ -7,6 +7,13 @@ angular.module('liteTech.service', [])
 				url : 'fixtures/residence.data.json', 
 				method: 'GET'
 			});
+		},
+
+		getCommercial : function(){
+			return $http({
+				url : 'fixtures/commercial.data.json', 
+				method: 'GET'
+			});
 		}
 	}
 }]);

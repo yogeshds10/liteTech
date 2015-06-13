@@ -1,44 +1,32 @@
 <div class="result-wrap">
 	<div class="result-header">
 		<a ui-sref="residence" class="back"></a>
-		<p>calculate</p>
+		<p>Calculate</p>
 	</div>
-	<!-- <div class="fixture-wrap">
-		<div class="fixture-inner-wrap">
-			<p class="current-avg-flux">Current Average Flux : <span>{{currentAvgFlux}}</span></p>
-			<div class="draw-area">
-				<p class="fixtures">Fixtures : {{graphData.fixtures}}</p>
-			</div>
-			<p class="optimum-flux">Optimum Flux : <span>{{optimumFlux}}</span></p>
-		</div>
-	</div> -->
+	<div class="lux-info">
+		<div class="optimum-lux">Optimum Lux : <span>{{optimumFlux}}</span></div>
+		<div class="current-lux">Current Lux : <span>{{currentAvgFlux}}</span></div>
+	</div>
 	<div id="container"></div>
+	<!-- <div class="move">
+		<a class="fade-toggle" ng-click="toggleShadow()">Move Lights</a>
+	</div> -->
+	<div class="light-info">
+		<div class="light-model">Light : <span>{{graphData.model}}</span></div>
+		<div class="drag-button" ng-click="dragFixtures()">
+			<div>Move Lights</div>
+		</div>
+		<div class="room-dimensions">Room Size : <span>{{selections.length}} X {{selections.width}} ft</span></div>
+	</div>
 	<div class="fixture-count">
 		<div class="row">
 		<div class="col">
-			<div class="button-bar">
-				<a class="button" ng-click="showShadow()">Shadow</a>
-				<a class="button" ng-click="hideShadow()">plain</a>				
-			</div>
-		</div>
-		</div>
-		<div class="row">
-		<div class="col">
-			<p>Fixtures</p>
+			<p>No of Lights</p>
 			<div class="button-bar">
 			  <a class="button ion-minus-round" ng-click="decreaseFixture()"></a>
-			  <a class="button">{{graphData.fixtures}}</a>
+			  <span class="button">{{graphData.fixtures}}</span>
 			  <a class="button ion-plus-round" ng-click="increaseFixture()"></a>
 			</div>	
-		</div>
-		</div>
-		<div class="row">
-		<div class="col">
-			<p><span>Current Avg Flux</span> <span>Optimum Flux</span></p>
-			<div class="button-bar">
-				<a class="button">{{currentAvgFlux}}</a>
-				<a class="button">{{optimumFlux}}</a>				
-			</div>
 		</div>
 		</div>
 	</div>
@@ -47,25 +35,22 @@
 			<p>Select Colors</p>
 			<div class="button-bar">
 				<label class="button item-radio">
-				    <input type="radio" name="group" ng-click="calculateFlux(0)">
+				    <input type="radio" name="group" checked="checked" ng-click="calculateFlux(0)">
 				    <div class="item-content">
 				      6000K
 				    </div>
-				    <i class="radio-icon ion-checkmark"></i>
 			  	</label>
 			  	<label class="button item-radio">
 				    <input type="radio" name="group" ng-click="calculateFlux(1)">
 				    <div class="item-content">
 				      4000k
 				    </div>
-				    <i class="radio-icon ion-checkmark"></i>
 			  	</label>
 			  	<label class="button item-radio">
 				    <input type="radio" name="group" ng-click="calculateFlux(2)">
 				    <div class="item-content">
 				      3000k
 				    </div>
-				    <i class="radio-icon ion-checkmark"></i>
 			  	</label>
 			</div>	
 		</div>
