@@ -3,13 +3,17 @@ body{
 }
 
 .back{
-	height: 22px;
-	width: 20px;
+	height: 100%;
+	width: 40px;
 	background: url('../img/back.png') no-repeat center center;
-	background-size: contain;
+	background-size: 40%;
 }
 .popup-container{
 	z-index: 999;
+}
+
+.draggable{
+	display: none;
 }
 
 /*Home Screen*/
@@ -61,8 +65,8 @@ body{
 }
 .res-header a{
 	position: absolute;
-	left: 20px;
-	top: 14px;
+	left: 10px;
+	top: 0px;
 	font-size: 2em;
 	color: #fff;
 }
@@ -234,8 +238,8 @@ body{
 }
 .result-header a{
 	position: absolute;
-	left: 20px;
-	top: 14px;
+	left: 10px;
+	top: 0px;
 	font-size: 2em;
 	color: #fff;
 }

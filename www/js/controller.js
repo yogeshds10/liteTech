@@ -14,6 +14,7 @@ angular.module('liteTech.controller', ['liteTech.service'])
 		if(cat === "residence"){
 			liteTechService.getResidence().then(function (response){
 				$scope.residence.data = response.data;
+				$scope.selectedCategory = 'Residence';
 				for(x in $scope.residence.data){
 					$scope.residence.data[x].selected = false;
 				}
@@ -23,6 +24,17 @@ angular.module('liteTech.controller', ['liteTech.service'])
 		}else if(cat === 'commercial'){
 			liteTechService.getCommercial().then(function (response){
 				$scope.residence.data = response.data;
+				$scope.selectedCategory = 'Commercial';
+				for(x in $scope.residence.data){
+					$scope.residence.data[x].selected = false;
+				}
+			}, function (response){
+				$scope.validateMsg = 'Failed to fetch residence data !!!';
+			});
+		}else if(cat === 'industrial'){
+			liteTechService.getIndustrial().then(function (response){
+				$scope.residence.data = response.data;
+				$scope.selectedCategory = 'Industrial';
 				for(x in $scope.residence.data){
 					$scope.residence.data[x].selected = false;
 				}
@@ -31,10 +43,6 @@ angular.module('liteTech.controller', ['liteTech.service'])
 			});
 		}
 	};
-	
-	
-
-	
 
 	$scope.showPopup = function (rd){
 	  myPopup = $ionicPopup.show({
@@ -70,6 +78,16 @@ angular.module('liteTech.controller', ['liteTech.service'])
 			$scope.getData();
 			$scope.calculateFlux(0);
 			$state.go('result');
+		}
+	};
+
+	$scope.clearData = function(){
+		$scope.selections.length = '';
+		$scope.selections.width = '';
+		$scope.selections.height = '';
+		$scope.selections.model = '';
+		for(x in $scope.residence.data){
+			$scope.residence.data[x].selected = false;
 		}
 	};
 
@@ -115,12 +133,14 @@ angular.module('liteTech.controller', ['liteTech.service'])
 	  if($scope.graphData.isDrag){
 	  	$('.drag-button div').html("Done");
 	  	$('.drag-button div').css("background","#7ed346");
-	  	$('.dragdot').attr('r','15');
+	  	$('.draggable').css("display","block");
+	  	$('.nondraggable').css("display","none");
 	  	$scope.graphData.isDrag = false;
 	  }else{
 	  	$('.drag-button div').html("Move Lights");
+	  	$('.draggable').css("display","none");
+	  	$('.nondraggable').css("display","block");
 	  	$('.drag-button div').css("background","rgb(61,61,61)");
-	  	$('.dragdot').attr('r','10');
 	  	$scope.graphData.isDrag = true;
 	  }
 	}
@@ -169,6 +189,7 @@ angular.module('liteTech.controller', ['liteTech.service'])
 			var height = (window.innerHeight * 80)/100,
 		      width = window.innerWidth,
 		      radius = 10,
+		      radiusdrag = 15,
 		      outerRadius = ((window.innerHeight * 80)/100 / $scope.graphData.fixturesInRow),
 		      padding = ((window.innerHeight * 80)/100 / $scope.graphData.fixturesInRow/3);
 
@@ -271,12 +292,19 @@ angular.module('liteTech.controller', ['liteTech.service'])
 		    .classed('shadow', true);
 
 		    groups.append("circle")
+		    .attr("r", radiusdrag)
+		    .attr("cx", function(d) { return d.x; })
+		    .attr("cy", function(d) { return d.y; })
+		    .style("fill", '#7fd347')
+		    .classed('draggable', true)
+		    .call(drag);
+
+		    groups.append("circle")
 		    .attr("r", radius)
 		    .attr("cx", function(d) { return d.x; })
 		    .attr("cy", function(d) { return d.y; })
 		    .style("fill", '#7fd347')
-		    .classed('dragdot', true)
-		    .call(drag);
+		    .classed('nondraggable', true);
 
 		    function dragmove(d) {
 		      d3.select(this)
@@ -285,6 +313,11 @@ angular.module('liteTech.controller', ['liteTech.service'])
 
 			    var shadowNode = this.parentNode.querySelector('.shadow');
 			    d3.select(shadowNode)
+		      .attr("cx", d.x = d3.event.x)
+		      .attr("cy", d.y = d3.event.y);
+
+		      var nonDraggbleNode = this.parentNode.querySelector('.nondraggable');
+			    d3.select(nonDraggbleNode)
 		      .attr("cx", d.x = d3.event.x)
 		      .attr("cy", d.y = d3.event.y);
 

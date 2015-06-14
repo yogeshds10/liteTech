@@ -14,6 +14,12 @@ angular.module('liteTech.service', [])
 				url : 'fixtures/commercial.data.json', 
 				method: 'GET'
 			});
+		},
+		getIndustrial : function(){
+			return $http({
+				url : 'fixtures/industrial.data.json', 
+				method: 'GET'
+			});
 		}
 	}
 }]);
