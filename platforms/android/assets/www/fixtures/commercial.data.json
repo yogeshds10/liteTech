@@ -18,7 +18,7 @@
 		"driver_efficiency" : "85",
 		"color" : "6000K/4000K/3000K",
 		"cri" : "70/70/80",
-		"light_output" : "3600lm/3240lm/2916lm",
+		"light_output" : "3600lm/3240lm/3060lm",
 		"category" : "downlight"
 	},
 	{
@@ -85,6 +85,28 @@
 		"color" : "6000K/4000K/3000K",
 		"cri" : "70/70/80",
 		"light_output" : "2125lm/1900lm/1800lm",
+		"category" : "downlight"
+	},
+	{
+		"model_no" : "tle36h-1",
+		"img_url" : "img/residence/TLE36H-1.png",
+		"input_power" : "36",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "85",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/70/80",
+		"light_output" : "3600lm/3240lm/3060lm",
+		"category" : "downlight"
+	},
+	{
+		"model_no" : "tle36h-2",
+		"img_url" : "img/residence/TLE36H-2.png",
+		"input_power" : "36",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "85",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/70/80",
+		"light_output" : "3600lm/3240lm/3060lm",
 		"category" : "downlight"
 	}
 ]

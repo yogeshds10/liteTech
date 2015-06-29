@@ -1,0 +1,233 @@
+[
+	{
+		"model_no" : "dler8a",
+		"img_url" : "img/residence/DLER8A.png",
+		"input_power" : "8",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "85",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/70/70",
+		"light_output" : "720lm/648/583lm",
+		"category" : "downlight"
+	},
+	{
+		"model_no" : "dler12a",
+		"img_url" : "img/residence/DLER12A.png",
+		"input_power" : "12",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "85",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/70/70",
+		"light_output" : "1080lm/972lm/875lm",
+		"category" : "downlight"
+	},
+	{
+		"model_no" : "dler15a",
+		"img_url" : "img/residence/DLER15A.png",
+		"input_power" : "15",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "85",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/70/70",
+		"light_output" : "1350lm/1215lm/1094lm",
+		"category" : "downlight"
+	},
+	{
+		"model_no" : "dler18a",
+		"img_url" : "img/residence/DLER18A.png",
+		"input_power" : "18",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "85",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/70/70",
+		"light_output" : "1620lm/1458lm/1312lm",
+		"category" : "downlight"
+	},
+	{
+		"model_no" : "dles9a",
+		"img_url" : "img/residence/DLES9A.png",
+		"input_power" : "9",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "85",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/70/70",
+		"light_output" : "810lm/729lm/656lm",
+		"category" : "downlight"
+	},
+	{
+		"model_no" : "dles15a",
+		"img_url" : "img/residence/DLES15A.png",
+		"input_power" : "15",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "85",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/70/70",
+		"light_output" : "1350lm/1215lm/1094lm",
+		"category" : "downlight"
+	},
+	{
+		"model_no" : "dles20a",
+		"img_url" : "img/residence/DLES20A.png",
+		"input_power" : "20",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "85",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/70/70",
+		"light_output" : "1800lm/1620lm/1458lm",
+		"category" : "downlight"
+	},
+	{
+		"model_no" : "fpses6a",
+		"img_url" : "img/residence/FPES6A.png",
+		"input_power" : "6",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "85",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/70/70",
+		"light_output" : "570lm/513lm/462lm",
+		"category" : "flat panel"
+	},
+	{
+		"model_no" : "fpses9a",
+		"img_url" : "img/residence/FPES9A.png",
+		"input_power" : "9",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "85",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/70/70",
+		"light_output" : "855lm/770lm/693lm",
+		"category" : "flat panel"
+	},
+	{
+		"model_no" : "fpses15a",
+		"img_url" : "img/residence/FPES15A.png",
+		"input_power" : "15",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "85",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/70/70",
+		"light_output" : "1425lm/1283lm/1154lm",
+		"category" : "flat panel"
+	},
+	{
+		"model_no" : "dlcr10e",
+		"img_url" : "img/residence/DLCR10E.png",
+		"input_power" : "10",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "85",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/80/80",
+		"light_output" : "900lm/810lm/729lm",
+		"category" : "cob downlight"
+	},
+	{
+		"model_no" : "dlcr10e-m",
+		"img_url" : "img/residence/DLCR10E-M.png",
+		"input_power" : "10",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "85",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/80/80",
+		"light_output" : "900lm/810lm/729lm",
+		"category" : "cob downlight"
+	},
+	{
+		"model_no" : "dlcr10e-m1",
+		"img_url" : "img/residence/DLCR10E-M1.png",
+		"input_power" : "10",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "85",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/80/80",
+		"light_output" : "900lm/810lm/729lm",
+		"category" : "cob downlight"
+	},
+	{
+		"model_no" : "dlcr12a",
+		"img_url" : "img/residence/DLCR12A.png",
+		"input_power" : "12",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "85",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/80/80",
+		"light_output" : "1080lm/971lm/875lm",
+		"category" : "cob downlight"
+	},
+	{
+		"model_no" : "dlcr20e",
+		"img_url" : "img/residence/DLCR20E.png",
+		"input_power" : "20",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "85",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/80/80",
+		"light_output" : "1800lm/1620lm/1458lm",
+		"category" : "cob downlight"
+	},
+	{
+		"model_no" : "dlor6a-m",
+		"img_url" : "img/residence/DLOR6A-M.png",
+		"input_power" : "6",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "85",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/80/80",
+		"light_output" : "540lm/486lm/437lm",
+		"category" : "downlight"
+	},
+	{
+		"model_no" : "dlor8c-m",
+		"img_url" : "img/residence/DLOR8C-M.png",
+		"input_power" : "8",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "85",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/80/80",
+		"light_output" : "720lm/648lm/583lm",
+		"category" : "downlight"
+	},
+	{
+		"model_no" : "dlor8e",
+		"img_url" : "img/residence/DLOR8E.png",
+		"input_power" : "8",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "85",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/80/80",
+		"light_output" : "720lm/648lm/583lm",
+		"category" : "downlight"
+	},
+	{
+		"model_no" : "dlor10a",
+		"img_url" : "img/residence/DLOR10A.png",
+		"input_power" : "10",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "85",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/80/80",
+		"light_output" : "900lm/810lm/729lm",
+		"category" : "downlight"
+	},
+	{
+		"model_no" : "dlor12c",
+		"img_url" : "img/residence/DLOR12C.png",
+		"input_power" : "12",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "85",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/80/80",
+		"light_output" : "1080lm/972lm/875lm",
+		"category" : "downlight"
+	},
+	{
+		"model_no" : "dlor12e",
+		"img_url" : "img/residence/DLOR12E.png",
+		"input_power" : "12",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "85",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/80/80",
+		"light_output" : "1080lm/972lm/875lm",
+		"category" : "downlight"
+	}
+]

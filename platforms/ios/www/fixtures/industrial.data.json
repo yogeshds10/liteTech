@@ -1,0 +1,73 @@
+[
+	{
+		"model_no" : "blel70h",
+		"img_url" : "img/residence/BLEL70H.png",
+		"input_power" : "70",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "90",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/70/80",
+		"light_output" : "8050lm/7245lm/6521lm",
+		"category" : "downlight"
+	},{
+		"model_no" : "blel120h",
+		"img_url" : "img/residence/BLEL120H.png",
+		"input_power" : "120",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "90",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/70/80",
+		"light_output" : "13800lm/12420lm/11178lm",
+		"category" : "downlight"
+	},{
+		"model_no" : "blor110e",
+		"img_url" : "img/residence/BlOR110E.png",
+		"input_power" : "110",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "90",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/70/80",
+		"light_output" : "10450lm/9405lm/8465lm",
+		"category" : "downlight"
+	},{
+		"model_no" : "bler110h",
+		"img_url" : "img/residence/BlER110H.png",
+		"input_power" : "110",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "90",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/70/80",
+		"light_output" : "12100lm/10890lm/9801lm",
+		"category" : "downlight"
+	},{
+		"model_no" : "bler150h",
+		"img_url" : "img/residence/BlER150H.png",
+		"input_power" : "150",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "90",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/70/80",
+		"light_output" : "15000lm/13500lm/12150lm",
+		"category" : "downlight"
+	},{
+		"model_no" : "bler210h",
+		"img_url" : "img/residence/BlER210H.png",
+		"input_power" : "210",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "90",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/70/80",
+		"light_output" : "21000lm/18900lm/17010lm",
+		"category" : "downlight"
+	},{
+		"model_no" : "bler250h",
+		"img_url" : "img/residence/BlER250H.png",
+		"input_power" : "250",
+		"input_voltage" : "220-240",
+		"driver_efficiency" : "90",
+		"color" : "6000K/4000K/3000K",
+		"cri" : "70/70/80",
+		"light_output" : "22500lm/20250lm/18225lm",
+		"category" : "downlight"
+	}
+] 

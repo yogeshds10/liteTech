@@ -14,6 +14,7 @@ angular.module('liteTech.controller', ['liteTech.service'])
 		if(cat === "residence"){
 			liteTechService.getResidence().then(function (response){
 				$scope.residence.data = response.data;
+				$scope.selectedCategory = 'Residence';
 				for(x in $scope.residence.data){
 					$scope.residence.data[x].selected = false;
 				}
@@ -23,6 +24,17 @@ angular.module('liteTech.controller', ['liteTech.service'])
 		}else if(cat === 'commercial'){
 			liteTechService.getCommercial().then(function (response){
 				$scope.residence.data = response.data;
+				$scope.selectedCategory = 'Commercial';
+				for(x in $scope.residence.data){
+					$scope.residence.data[x].selected = false;
+				}
+			}, function (response){
+				$scope.validateMsg = 'Failed to fetch residence data !!!';
+			});
+		}else if(cat === 'industrial'){
+			liteTechService.getIndustrial().then(function (response){
+				$scope.residence.data = response.data;
+				$scope.selectedCategory = 'Industrial';
 				for(x in $scope.residence.data){
 					$scope.residence.data[x].selected = false;
 				}
@@ -31,10 +43,6 @@ angular.module('liteTech.controller', ['liteTech.service'])
 			});
 		}
 	};
-	
-	
-
-	
 
 	$scope.showPopup = function (rd){
 	  myPopup = $ionicPopup.show({
@@ -73,6 +81,16 @@ angular.module('liteTech.controller', ['liteTech.service'])
 		}
 	};
 
+	$scope.clearData = function(){
+		$scope.selections.length = '';
+		$scope.selections.width = '';
+		$scope.selections.height = '';
+		$scope.selections.model = '';
+		for(x in $scope.residence.data){
+			$scope.residence.data[x].selected = false;
+		}
+	};
+
 	$scope.getData = function (){
 		var lightOutput = '';
 		for(data in $scope.residence.data){
@@ -91,20 +109,20 @@ angular.module('liteTech.controller', ['liteTech.service'])
 		$scope.graphData.roomHeight = Math.round($scope.selections.height);
 		$scope.graphData.luminen = parseInt($scope.selections.luminenSet[color]);
 		$scope.graphData.fixtures = Math.round(($scope.optimumFlux * $scope.graphData.roomLength * $scope.graphData.roomWidth) / (0.63 * 0.69 * $scope.graphData.luminen));				
-		$scope.fixtureFlux = $scope.optimumFlux/$scope.graphData.fixtures;
+		$scope.graphData.fixtureFlux = $scope.optimumFlux/$scope.graphData.fixtures;
 		$scope.currentAvgFlux = $scope.optimumFlux;
-    	$scope.plotGraph();
+    $scope.plotGraph();
 	};
 
 	$scope.increaseFixture = function (){
 		$scope.graphData.fixtures = $scope.graphData.fixtures + 1;
-		$scope.currentAvgFlux = Math.round($scope.fixtureFlux*$scope.graphData.fixtures);
+		$scope.currentAvgFlux = Math.round($scope.graphData.fixtureFlux*$scope.graphData.fixtures);
 		$scope.plotGraph();
 	};
 
 	$scope.decreaseFixture = function (){
 		$scope.graphData.fixtures = $scope.graphData.fixtures - 1;
-		$scope.currentAvgFlux = Math.round($scope.fixtureFlux*$scope.graphData.fixtures);
+		$scope.currentAvgFlux = Math.round($scope.graphData.fixtureFlux*$scope.graphData.fixtures);
 		$scope.plotGraph();
 	};
 
@@ -115,62 +133,121 @@ angular.module('liteTech.controller', ['liteTech.service'])
 	  if($scope.graphData.isDrag){
 	  	$('.drag-button div').html("Done");
 	  	$('.drag-button div').css("background","#7ed346");
-	  	$('.dragdot').attr('r','15');
+	  	$('.draggable').css("display","block");
+	  	$('.nondraggable').css("display","none");
 	  	$scope.graphData.isDrag = false;
 	  }else{
 	  	$('.drag-button div').html("Move Lights");
+	  	$('.draggable').css("display","none");
+	  	$('.nondraggable').css("display","block");
 	  	$('.drag-button div').css("background","rgb(61,61,61)");
-	  	$('.dragdot').attr('r','10');
 	  	$scope.graphData.isDrag = true;
 	  }
 	}
 
   $scope.plotGraph = function () {  
+
+  	var rmLength = $scope.graphData.roomLength;
+  	var rmWidth = $scope.graphData.roomWidth;
+  	var gcd = function(a,b){
+  		while (b > 0)
+	    {
+	        var temp = b;
+	        b = a % b;
+	        a = temp;
+	    }
+	    return a;
+  	};
+
+  	// console.log('GCD', gcd(rmLength,rmWidth));
+  	// console.log('Ratio', rmLength/gcd(rmLength,rmWidth), ':' , rmWidth/gcd(rmLength,rmWidth));
+
+  	var graphwidth = window.innerWidth;
+  	if(rmLength <= rmWidth){
+  		var calWidth = graphwidth / (rmWidth/gcd(rmLength,rmWidth));	
+  	}else{
+  		var calWidth = graphwidth / (rmLength/gcd(rmLength,rmWidth));	
+  	}
+  	
   	$scope.graphData.isDrag = false;
   	$scope.dragFixtures();
-		$scope.graphData.maxSpace = 1.5;
+
+		if($scope.graphData.luminen <= 900){
+			$scope.graphData.maxSpace = 1.2;
+		}else if($scope.graphData.luminen > 900 && $scope.graphData.luminen <= 1800){
+			$scope.graphData.maxSpace = 1.5;
+		}else if($scope.graphData.luminen > 1800 && $scope.graphData.luminen <= 2700){
+			$scope.graphData.maxSpace = 2;
+		}else if($scope.graphData.luminen > 2700 && $scope.graphData.luminen <= 3600){
+			$scope.graphData.maxSpace = 2.5;
+		}else if($scope.graphData.luminen > 3600 && $scope.graphData.luminen <= 10000){
+			$scope.graphData.maxSpace = 3.5;
+		}else if($scope.graphData.luminen > 10000 && $scope.graphData.luminen <= 15000){
+			$scope.graphData.maxSpace = 4;
+		}else{
+			$scope.graphData.maxSpace = 5;
+		}
+
 		$scope.graphData.noOfRows = Math.round($scope.graphData.roomWidth/$scope.graphData.maxSpace);
 		$scope.graphData.fixturesInRow = Math.round($scope.graphData.fixtures/$scope.graphData.noOfRows);
 		$scope.graphData.axialSpace = $scope.graphData.roomLength/$scope.graphData.fixturesInRow;
 		$scope.graphData.traverseSpace = $scope.graphData.roomWidth/$scope.graphData.noOfRows;
 		$scope.graphData.plotData = [];
 
-		// var _rowPosition = $scope.graphData.axialSpace/2;
-		// for(var y = 0 ; y < $scope.graphData.noOfRows ; y++){
-		// 	var _colposition = $scope.graphData.traverseSpace/3;
-		// 	for(var z = 0 ; z < $scope.graphData.fixturesInRow ; z++){
-		// 		var _data={};
-		// 		_data.x = _rowPosition;
-		// 		_data.y = _colposition;
-		// 		$scope.graphData.plotData.push(_data);
-		// 		_colposition = _colposition + $scope.graphData.axialSpace;
-		// 	}
-		// 	_rowPosition = _rowPosition+ $scope.graphData.traverseSpace;
-		// }
+		// console.log($scope.graphData);
 
-		$scope.graphData.column = Math.round($scope.graphData.fixtures / $scope.graphData.fixturesInRow);
-
-		var _rowPosition = $scope.graphData.axialSpace;
-		for(var y = 0 ; y < $scope.graphData.fixturesInRow ; y++){
-			var _colposition = $scope.graphData.traverseSpace;
-			for(var z = 0 ; z < $scope.graphData.column ; z++){
-				var _data={};
-				_data.y = _rowPosition;
-				_data.x = _colposition;
-				$scope.graphData.plotData.push(_data);
-				_colposition = _colposition + $scope.graphData.axialSpace;
+		if(rmLength <= rmWidth){
+			var _rowPosition = 1;
+			for(var y = 0 ; y < $scope.graphData.noOfRows ; y++){
+				var _colposition = 1;
+				for(var z = 0 ; z < $scope.graphData.fixturesInRow ; z++){
+					var _data={};
+					_data.x = _rowPosition;
+					_data.y = _colposition;
+					$scope.graphData.plotData.push(_data);
+					_colposition = _colposition + $scope.graphData.axialSpace;
+				}
+				_rowPosition = _rowPosition+ $scope.graphData.traverseSpace;
 			}
-			_rowPosition = _rowPosition+ $scope.graphData.traverseSpace;
+		}else{
+			var _rowPosition = 1;
+			for(var y = 0 ; y < $scope.graphData.noOfRows ; y++){
+				var _colposition = 1;
+				for(var z = 0 ; z < $scope.graphData.fixturesInRow ; z++){
+					var _data={};
+					_data.y = _rowPosition;
+					_data.x = _colposition;
+					$scope.graphData.plotData.push(_data);
+					_colposition = _colposition + $scope.graphData.axialSpace;
+				}
+				_rowPosition = _rowPosition+ $scope.graphData.traverseSpace;
+			}
 		}
+
+		// $scope.graphData.column = Math.round($scope.graphData.fixtures / $scope.graphData.fixturesInRow);
 
 		setTimeout(function(){
 			d3.select('#container svg').remove();
 
-			var height = (window.innerHeight * 80)/100,
-		      width = window.innerWidth,
-		      radius = 10,
-		      outerRadius = ((window.innerHeight * 80)/100 / $scope.graphData.fixturesInRow),
-		      padding = ((window.innerHeight * 80)/100 / $scope.graphData.fixturesInRow/3);
+			if(rmLength <= rmWidth){
+				var height = calWidth * rmLength/gcd(rmLength,rmWidth),
+	      width = window.innerWidth,
+	      radius = 10,
+	      radiusdrag = 15,
+	      outerRadius = (width / $scope.graphData.fixturesInRow),
+	      padding = ((window.innerHeight * 80)/100 / $scope.graphData.fixturesInRow/3);
+	    }else{
+				var height = calWidth * rmWidth/gcd(rmLength,rmWidth),
+	      width = window.innerWidth,
+	      radius = 10,
+	      radiusdrag = 15,
+	      outerRadius = (width / $scope.graphData.fixturesInRow),
+	      padding = ((window.innerHeight * 80)/100 / $scope.graphData.fixturesInRow/3);    	
+	    }
+				
+			// console.log('Width', width);
+			// console.log('height', height);
+			// console.log('ratio cal', calWidth);
 
 		  var margins = {
 		    "left": 10,
@@ -245,12 +322,12 @@ angular.module('liteTech.controller', ['liteTech.service'])
 		    // Define the gradient colors
 		    gradient.append("svg:stop")
 		        .attr("offset", "0%")
-		        .attr("stop-color", "rgba(0,0,0,0.3)")
+		        .attr("stop-color", "#fafafa")
 		        .attr("stop-opacity", 1);
 
 		    gradient.append("svg:stop")
 		        .attr("offset", "100%")
-		        .attr("stop-color", "#ffffff")
+		        .attr("stop-color", "#fff")
 		        .attr("stop-opacity", 0);
 
 
@@ -271,12 +348,19 @@ angular.module('liteTech.controller', ['liteTech.service'])
 		    .classed('shadow', true);
 
 		    groups.append("circle")
+		    .attr("r", radiusdrag)
+		    .attr("cx", function(d) { return d.x; })
+		    .attr("cy", function(d) { return d.y; })
+		    .style("fill", '#7fd347')
+		    .classed('draggable', true)
+		    .call(drag);
+
+		    groups.append("circle")
 		    .attr("r", radius)
 		    .attr("cx", function(d) { return d.x; })
 		    .attr("cy", function(d) { return d.y; })
 		    .style("fill", '#7fd347')
-		    .classed('dragdot', true)
-		    .call(drag);
+		    .classed('nondraggable', true);
 
 		    function dragmove(d) {
 		      d3.select(this)
@@ -285,6 +369,11 @@ angular.module('liteTech.controller', ['liteTech.service'])
 
 			    var shadowNode = this.parentNode.querySelector('.shadow');
 			    d3.select(shadowNode)
+		      .attr("cx", d.x = d3.event.x)
+		      .attr("cy", d.y = d3.event.y);
+
+		      var nonDraggbleNode = this.parentNode.querySelector('.nondraggable');
+			    d3.select(nonDraggbleNode)
 		      .attr("cx", d.x = d3.event.x)
 		      .attr("cy", d.y = d3.event.y);
 
