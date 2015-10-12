@@ -1,7 +1,7 @@
 [
 	{
 		"model_no" : "blel70h",
-		"img_url" : "img/residence/BLEL70H.png",
+		"img_url" : "img/residence/ind-1.png",
 		"input_power" : "70",
 		"input_voltage" : "220-240",
 		"driver_efficiency" : "90",
@@ -11,7 +11,7 @@
 		"category" : "downlight"
 	},{
 		"model_no" : "blel120h",
-		"img_url" : "img/residence/BLEL120H.png",
+		"img_url" : "img/residence/ind-2.png",
 		"input_power" : "120",
 		"input_voltage" : "220-240",
 		"driver_efficiency" : "90",
@@ -21,7 +21,7 @@
 		"category" : "downlight"
 	},{
 		"model_no" : "blor110e",
-		"img_url" : "img/residence/BlOR110E.png",
+		"img_url" : "img/residence/ind-3.png",
 		"input_power" : "110",
 		"input_voltage" : "220-240",
 		"driver_efficiency" : "90",
@@ -31,7 +31,7 @@
 		"category" : "downlight"
 	},{
 		"model_no" : "bler110h",
-		"img_url" : "img/residence/BlER110H.png",
+		"img_url" : "img/residence/ind-4.png",
 		"input_power" : "110",
 		"input_voltage" : "220-240",
 		"driver_efficiency" : "90",
@@ -41,7 +41,7 @@
 		"category" : "downlight"
 	},{
 		"model_no" : "bler150h",
-		"img_url" : "img/residence/BlER150H.png",
+		"img_url" : "img/residence/ind-5.png",
 		"input_power" : "150",
 		"input_voltage" : "220-240",
 		"driver_efficiency" : "90",
@@ -51,7 +51,7 @@
 		"category" : "downlight"
 	},{
 		"model_no" : "bler210h",
-		"img_url" : "img/residence/BlER210H.png",
+		"img_url" : "img/residence/ind-6.png",
 		"input_power" : "210",
 		"input_voltage" : "220-240",
 		"driver_efficiency" : "90",
@@ -61,7 +61,7 @@
 		"category" : "downlight"
 	},{
 		"model_no" : "bler250h",
-		"img_url" : "img/residence/BlER250H.png",
+		"img_url" : "img/residence/ind-7.png",
 		"input_power" : "250",
 		"input_voltage" : "220-240",
 		"driver_efficiency" : "90",

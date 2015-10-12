@@ -41,6 +41,10 @@ angular.module('liteTech', ['ionic','liteTech.controller','liteTech.service','io
     url: "/result",
     templateUrl : "templates/result.html"
   })
+  .state('fullscreen', {
+    url: "/fullscreen",
+    templateUrl : "templates/fullscreen.html"
+  })
   $urlRouterProvider.otherwise("/home");
 
 });

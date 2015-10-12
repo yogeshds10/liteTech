@@ -349,7 +349,7 @@ body{
 	margin: 0 auto;
 }
 
-#container svg{
+#container svg, #fullscreen svg{
 	background: rgba(0,0,0,1);
 }
 
@@ -420,6 +420,33 @@ body{
 	background: rgb(61,61,61);
 	border-radius: 3px;
 	margin: 0 auto;
+	cursor: pointer;
+}
+.next-link{
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100px;
+	cursor: pointer;
+}
+
+#fullscreen{
+	position: absolute;
+	top: 25px;
+	z-index: -10;	
+}
+
+.fullscreen-bar{
+	background: #7ed346;
+	color: #fff;
+	border-radius: 5px;
+	padding: 5px 0;
+}
+.fullscreen-bar a{
+	display: block;
+	text-align: center;
+	width: 100%;
+	font-size: 1.2em;
 	cursor: pointer;
 }
 

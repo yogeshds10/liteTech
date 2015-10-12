@@ -5,12 +5,25 @@ angular.module('liteTech.controller', ['liteTech.service'])
 	$scope.selections = {};
 	$scope.graphData = {};
 	$scope.validateMsg = '';
+	$scope.validFlag = false;
 	$scope.fixtures = 0;
 	$scope.currentAvgFlux = 0;
 	$scope.optimumFlux = 250;
 	$scope.fixtureFlux = 0;
 
+	$scope.clearData = function(){
+		$scope.selections.length = '';
+		$scope.selections.width = '';
+		$scope.selections.height = '';
+		$scope.selections.model = '';
+		for(x in $scope.residence.data){
+			$scope.residence.data[x].selected = false;
+		}
+	};
+
 	$scope.category = function(cat){
+		$scope.clearData();
+		$scope.validFlag = false;
 		if(cat === "residence"){
 			liteTechService.getResidence().then(function (response){
 				$scope.residence.data = response.data;
@@ -54,6 +67,7 @@ angular.module('liteTech.controller', ['liteTech.service'])
 	        type: 'button-balanced',
 	        onTap: function(e) {
 	          $scope.selections.model = rd.model_no;
+	          $scope.setValidFlag();
 	        	for(x in $scope.residence.data){
     					if($scope.residence.data[x].model_no === rd.model_no){
     						$scope.residence.data[x].selected = true;
@@ -71,6 +85,14 @@ angular.module('liteTech.controller', ['liteTech.service'])
 		myPopup.close();
 	};
 
+	$scope.setValidFlag = function(){
+		if(!$scope.selections.length || !$scope.selections.width || !$scope.selections.height || !$scope.selections.model){
+			$scope.validFlag = false;
+		}else{
+			$scope.validFlag = true;
+		}
+	}
+
 	$scope.validate = function (){
 		if($scope.selections.length === '' || $scope.selections.length === undefined || $scope.selections.width === '' || $scope.selections.width === undefined || $scope.selections.height === '' || $scope.selections.height === undefined || $scope.selections.model === '' || $scope.selections.model === undefined){
 			$scope.validateMsg = 'Please provide the area of room and also select any one light !!!';
@@ -78,16 +100,6 @@ angular.module('liteTech.controller', ['liteTech.service'])
 			$scope.getData();
 			$scope.calculateFlux(0);
 			$state.go('result');
-		}
-	};
-
-	$scope.clearData = function(){
-		$scope.selections.length = '';
-		$scope.selections.width = '';
-		$scope.selections.height = '';
-		$scope.selections.model = '';
-		for(x in $scope.residence.data){
-			$scope.residence.data[x].selected = false;
 		}
 	};
 
@@ -106,7 +118,7 @@ angular.module('liteTech.controller', ['liteTech.service'])
 		$scope.graphData.model = $scope.selections.model;
 		$scope.graphData.roomLength = Math.round($scope.selections.length/3.28);
 		$scope.graphData.roomWidth = Math.round($scope.selections.width/3.28);
-		$scope.graphData.roomHeight = Math.round($scope.selections.height);
+		$scope.graphData.roomHeight = Math.round($scope.selections.height/3.28);
 		$scope.graphData.luminen = parseInt($scope.selections.luminenSet[color]);
 		$scope.graphData.fixtures = Math.round(($scope.optimumFlux * $scope.graphData.roomLength * $scope.graphData.roomWidth) / (0.63 * 0.69 * $scope.graphData.luminen));				
 		$scope.graphData.fixtureFlux = $scope.optimumFlux/$scope.graphData.fixtures;
@@ -147,8 +159,8 @@ angular.module('liteTech.controller', ['liteTech.service'])
 
   $scope.plotGraph = function () {  
 
-  	var rmLength = $scope.graphData.roomLength;
-  	var rmWidth = $scope.graphData.roomWidth;
+  	$scope.rmLength = $scope.graphData.roomLength;
+  	$scope.rmWidth = $scope.graphData.roomWidth;
   	var gcd = function(a,b){
   		while (b > 0)
 	    {
@@ -159,14 +171,14 @@ angular.module('liteTech.controller', ['liteTech.service'])
 	    return a;
   	};
 
-  	// console.log('GCD', gcd(rmLength,rmWidth));
-  	// console.log('Ratio', rmLength/gcd(rmLength,rmWidth), ':' , rmWidth/gcd(rmLength,rmWidth));
+  	// console.log('GCD', gcd($scope.rmLength,$scope.rmWidth));
+  	// console.log('Ratio', $scope.rmLength/gcd($scope.rmLength,$scope.rmWidth), ':' , $scope.rmWidth/gcd($scope.rmLength,$scope.rmWidth));
 
   	var graphwidth = window.innerWidth;
-  	if(rmLength <= rmWidth){
-  		var calWidth = graphwidth / (rmWidth/gcd(rmLength,rmWidth));	
+  	if($scope.rmLength <= $scope.rmWidth){
+  		var calWidth = graphwidth / ($scope.rmWidth/gcd($scope.rmLength,$scope.rmWidth));	
   	}else{
-  		var calWidth = graphwidth / (rmLength/gcd(rmLength,rmWidth));	
+  		var calWidth = graphwidth / ($scope.rmLength/gcd($scope.rmLength,$scope.rmWidth));	
   	}
   	
   	$scope.graphData.isDrag = false;
@@ -196,7 +208,7 @@ angular.module('liteTech.controller', ['liteTech.service'])
 
 		// console.log($scope.graphData);
 
-		if(rmLength <= rmWidth){
+		if($scope.rmLength <= $scope.rmWidth){
 			var _rowPosition = 1;
 			for(var y = 0 ; y < $scope.graphData.noOfRows ; y++){
 				var _colposition = 1;
@@ -228,21 +240,22 @@ angular.module('liteTech.controller', ['liteTech.service'])
 
 		setTimeout(function(){
 			d3.select('#container svg').remove();
+			d3.select('#fullscreen svg').remove();
 
-			if(rmLength <= rmWidth){
-				var height = calWidth * rmLength/gcd(rmLength,rmWidth),
+			if($scope.rmLength <= $scope.rmWidth){
+				var height = calWidth * $scope.rmLength/gcd($scope.rmLength,$scope.rmWidth),
 	      width = window.innerWidth,
 	      radius = 10,
 	      radiusdrag = 15,
-	      outerRadius = (width / $scope.graphData.fixturesInRow),
-	      padding = ((window.innerHeight * 80)/100 / $scope.graphData.fixturesInRow/3);
+	      outerRadius = (width / $scope.graphData.fixturesInRow) /1.5,
+	      padding = ((window.innerHeight * 80)/100 / $scope.graphData.fixturesInRow/2.5);
 	    }else{
-				var height = calWidth * rmWidth/gcd(rmLength,rmWidth),
+				var height = calWidth * $scope.rmWidth/gcd($scope.rmLength,$scope.rmWidth),
 	      width = window.innerWidth,
 	      radius = 10,
 	      radiusdrag = 15,
-	      outerRadius = (width / $scope.graphData.fixturesInRow),
-	      padding = ((window.innerHeight * 80)/100 / $scope.graphData.fixturesInRow/3);    	
+	      outerRadius = (width / $scope.graphData.noOfRows) /1.5,
+	      padding = ((window.innerHeight * 80)/100 / $scope.graphData.noOfRows/2.5);    	
 	    }
 				
 			// console.log('Width', width);
@@ -262,7 +275,7 @@ angular.module('liteTech.controller', ['liteTech.service'])
 		  	d3.event.sourceEvent.stopPropagation();
     		d3.event.sourceEvent.preventDefault();
 		  })
-		  .on("drag", dragmove);
+		  .on("drag", dragmove);		  
 
 		  var svg = d3.select("#container")
 		            .append("svg")
@@ -384,8 +397,119 @@ angular.module('liteTech.controller', ['liteTech.service'])
 		      });
 		  	}
 
+		  	var fwidth = window.innerWidth;
+		  	var fheight = window.innerHeight;
+
+		  	$scope.graphData.fplotData = [];
+		  	if($scope.rmLength <= $scope.rmWidth){
+					var _rowPosition = 1;
+					for(var y = 0 ; y < $scope.graphData.noOfRows ; y++){
+						var _colposition = 1;
+						for(var z = 0 ; z < $scope.graphData.fixturesInRow ; z++){
+							var _data={};
+							_data.y = _rowPosition;
+							_data.x = _colposition;
+							$scope.graphData.fplotData.push(_data);
+							_colposition = _colposition + $scope.graphData.axialSpace;
+						}
+						_rowPosition = _rowPosition+ $scope.graphData.traverseSpace;
+					}
+				}else{
+					var _rowPosition = 1;
+					for(var y = 0 ; y < $scope.graphData.noOfRows ; y++){
+						var _colposition = 1;
+						for(var z = 0 ; z < $scope.graphData.fixturesInRow ; z++){
+							var _data={};
+							_data.x = _rowPosition;
+							_data.y = _colposition;
+							$scope.graphData.fplotData.push(_data);
+							_colposition = _colposition + $scope.graphData.axialSpace;
+						}
+						_rowPosition = _rowPosition+ $scope.graphData.traverseSpace;
+					}
+				}
+
+		  	var fsvg = d3.select("#fullscreen")
+		            .append("svg")
+		            .attr("width", fwidth)
+		            .attr("height", fheight)
+		            .append("g")
+		            .attr("transform", "translate(" + 0 + "," + 0 + ")");		  
+
+		    var fx = d3.scale.linear()
+		          .domain(d3.extent($scope.graphData.fplotData, function (d) {
+		            return d.x;
+		          }))
+		          .range([padding , fwidth - padding]);
+
+		  	var fy = d3.scale.linear()
+		      .domain(d3.extent($scope.graphData.fplotData, function (d) {
+		          return d.y;
+		      }))
+		      .range([fheight - padding, padding]);          
+
+		    // Define the gradient
+		    var gradient = fsvg.append("svg:defs")
+		        .append("fsvg:radialGradient")
+		        .attr("id", "gradient")
+		        .attr("fx", "50%")
+		        .attr("fy", "50%")
+		        .attr("r", "50%")
+		        .attr("spreadMethod", "pad");
+
+		    // Define the gradient colors
+		    gradient.append("fsvg:stop")
+		        .attr("offset", "0%")
+		        .attr("stop-color", "#fafafa")
+		        .attr("stop-opacity", 1);
+
+		    gradient.append("fsvg:stop")
+		        .attr("offset", "100%")
+		        .attr("stop-color", "#fff")
+		        .attr("stop-opacity", 0);
+
+		    var groups = fsvg.selectAll("g.node")
+		        .data($scope.graphData.fplotData)
+		        .enter().append("g")
+		        .classed("node", true)
+		        .attr("z-index", "-1")
+		        .attr('transform', function (d) {
+		          return "translate(" + fx(d.x) + "," + fy(d.y) + ")";
+		        });
+
+		    groups.append("circle")
+		    .attr("r", outerRadius)
+		    .attr("cx", function(d) { return d.x; })
+		    .attr("cy", function(d) { return d.y; })
+		    .attr('fill', 'url(#gradient)')
+		    .classed('shadow', true);
+
+		    groups.append("circle")
+		    .attr("r", radiusdrag)
+		    .attr("cx", function(d) { return d.x; })
+		    .attr("cy", function(d) { return d.y; })
+		    .style("fill", '#7fd347')
+		    .classed('draggable', true)
+		    .call(drag);
+
+		    groups.append("circle")
+		    .attr("r", radius)
+		    .attr("cx", function(d) { return d.x; })
+		    .attr("cy", function(d) { return d.y; })
+		    .style("fill", '#7fd347')
+		    .classed('nondraggable', true);
+
 		},500);
 
   };
+
+  $scope.fullscreen = function(){
+  	$scope.plotGraph();
+  	$state.go('fullscreen');
+  };
+  $scope.backToResults = function(){
+  	$scope.plotGraph();
+  	$state.go('result');
+  }
 
 }]);

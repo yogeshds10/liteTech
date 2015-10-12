@@ -2,6 +2,7 @@
 	<div class="res-header">
 		<a ui-sref="home" class="back"></a>
 		<p>{{selectedCategory}}</p>
+    <p class="next-link" ng-if="validFlag" ng-click="validate()">Next</p>
 	</div>
 	<div class="optimum-info">
 		The optimum flux for a residence is <span>{{optimumFlux}}</span>
@@ -10,15 +11,15 @@
 		<p>Enter space dimensions :</p>
     <div class="input-wrap">
       <label>Length</label>
-      <input type="number" placeholder="in feet" ng-model="selections.length" min="0"/>  
+      <input type="number" placeholder="in feet" ng-model="selections.length" min="0" ng-change="setValidFlag()"/>  
     </div>
     <div class="input-wrap">
       <label>Width</label>
-      <input type="number" placeholder="in feet" ng-model="selections.width" min="0"/>  
+      <input type="number" placeholder="in feet" ng-model="selections.width" min="0" ng-change="setValidFlag()"/>  
     </div>
     <div class="input-wrap">
       <label>Height</label>
-      <input type="number" placeholder="in feet" ng-model="selections.height" min="0"/>
+      <input type="number" placeholder="in feet" ng-model="selections.height" min="0" ng-change="setValidFlag()"/>
     </div>
 	</div>
   <div class="light-type-wrap">
@@ -33,5 +34,4 @@
     </div>
   </div>
   <p class="error-msg">{{validateMsg}}</p>
-  <button class="button button-balanced button-next" ng-click="validate()">Next</button>
 </div>
